@@ -1,2 +1,2 @@
 # Lingle
-Fun language learning app for kids
+Fun, interactive language learning app for kids
