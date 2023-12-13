@@ -36,18 +36,28 @@ fun FinalScreenLayout(modifier: Modifier = Modifier) {
         FakeNavBar(
             modifier.weight(1f)
         )
-        Spacer(modifier = modifier.height(20.dp))
+        Spacer(modifier = modifier
+            .weight(0.5f)
+        )
         SubHeadingText(
             text = stringResource(id = R.string.final_message),
             modifier = modifier.weight(1f)
         )
-        Spacer(modifier = modifier.height(20.dp))
+        Spacer(modifier = modifier
+            .weight(0.5f)
+        )
         FinalCard(
             itemList = fakeItemsList,
-            modifier = modifier.weight(1f)
+            modifier = modifier.weight(4f)
         )
-        Spacer(modifier = modifier.height(20.dp))
-        NewGameButton()
+        Spacer(modifier = modifier
+            .weight(0.5f)
+        )
+        NewGameButton(modifier = modifier.weight(0.6f))
+
+        Spacer(modifier = modifier
+            .weight(0.5f)
+        )
     }
 
 }

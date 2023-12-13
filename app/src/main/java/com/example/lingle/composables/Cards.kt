@@ -3,7 +3,9 @@ package com.example.lingle.composables
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -24,7 +26,7 @@ fun FinalCard(itemList: List<String>, modifier: Modifier = Modifier) {
     Card(
         colors = CardDefaults.cardColors(Color.White),
         border = BorderStroke(3.dp, Color.Black),
-        shape = RoundedCornerShape(48.dp),
+        shape = RoundedCornerShape(20.dp),
         elevation = CardDefaults.cardElevation(16.dp),
         modifier = modifier
             .fillMaxWidth()
@@ -36,8 +38,11 @@ fun FinalCard(itemList: List<String>, modifier: Modifier = Modifier) {
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
                 modifier = modifier
-                    .padding(20.dp)
+//                    .height(30.dp)
+                    .wrapContentHeight(align = Alignment.CenterVertically)
                     .align(Alignment.CenterHorizontally)
+                    .fillMaxWidth()
+                    .weight(1f)
             )
         }
     }

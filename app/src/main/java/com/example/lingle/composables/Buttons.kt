@@ -29,12 +29,10 @@ fun NewGameButton(modifier: Modifier = Modifier) {
         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF077274)),
         border = BorderStroke(2.dp, Color.White),
         modifier = modifier
-            .height(50.dp)
-            .width(150.dp)
     ) {
         Text(
             text = stringResource(id = R.string.new_game),
-            fontSize = 20.sp,
+            fontSize = 30.sp,
             style = MaterialTheme.typography.bodyLarge
         )
     }
