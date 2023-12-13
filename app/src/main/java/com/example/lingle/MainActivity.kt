@@ -10,36 +10,31 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.lingle.screens.FinalScreenLayout
+import com.example.lingle.screens.HomePage
 import com.example.lingle.ui.theme.LingleTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             LingleTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    FinalScreenLayout(
-                        startColour = Color(0xFFFFF0C5),
-                        endColour = Color(0xFFFFBF00)
-                    )
+                    HomePage()
                 }
             }
         }
     }
 }
 
+
 @Preview(showBackground = true)
 @Composable
-fun FinalScreenPreview() {
+fun HomePagePreview() {
     LingleTheme {
-        FinalScreenLayout(
-            startColour = Color(0xFFFFF0C5),
-            endColour = Color(0xFFFFBF00)
-        )
+        HomePage()
     }
 }
