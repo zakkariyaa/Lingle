@@ -21,13 +21,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.lingle.R
 
+// Button to link to a new game of the same category
 @Composable
 fun NewGameButton(modifier: Modifier = Modifier) {
     Button(
         onClick = { /*TODO*/ },
         shape = RoundedCornerShape(10.dp),
         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF077274)),
-        border = BorderStroke(2.dp, Color.White),
+        border = BorderStroke(3.dp, Color.White),
         modifier = modifier
     ) {
         Text(

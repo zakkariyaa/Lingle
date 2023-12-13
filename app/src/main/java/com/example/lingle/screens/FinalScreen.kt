@@ -1,16 +1,18 @@
 package com.example.lingle.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -21,8 +23,9 @@ import com.example.lingle.composables.NewGameButton
 import com.example.lingle.composables.SubHeadingText
 
 
+// Layout of the final screen of the game
 @Composable
-fun FinalScreenLayout(modifier: Modifier = Modifier) {
+fun FinalScreenLayout(startColour: Color, endColour: Color, modifier: Modifier = Modifier) {
 
     val fakeItemsList = listOf("Apple", "Banana", "Orange", "Pear", "Kiwi")
 
@@ -30,6 +33,14 @@ fun FinalScreenLayout(modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
             .fillMaxSize()
+            .background(
+                Brush.verticalGradient(
+                    listOf(
+                        startColour,
+                        endColour
+                    )
+                )
+            )
             .padding(20.dp)
     ) {
 
@@ -63,6 +74,7 @@ fun FinalScreenLayout(modifier: Modifier = Modifier) {
 }
 
 
+// Fake navbar as a placeholder
 @Composable
 fun FakeNavBar(modifier: Modifier = Modifier) {
 
@@ -86,5 +98,8 @@ fun FakeNavBar(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun FinalScreenPreview() {
-    FinalScreenLayout()
+    FinalScreenLayout(
+        startColour = Color(0xFFFFF0C5),
+        endColour = Color(0xFFFFBF00)
+    )
 }

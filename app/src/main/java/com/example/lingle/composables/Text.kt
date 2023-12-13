@@ -11,6 +11,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.lingle.R
 
+// Subheading text composable
+// Can be reused on all game screens with appropriate text
 @Composable
 fun SubHeadingText(text: String, modifier: Modifier = Modifier) {
     Text(
