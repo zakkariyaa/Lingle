@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Lingle</string>
+    <string name="final_message">Well done!</string>
+    <string name="new_game">New Game</string>
 </resources>
