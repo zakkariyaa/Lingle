@@ -83,6 +83,8 @@ fun HomePageCards (text: String, color: Color, picture: Painter, modifier: Modif
                 contentDescription = "quiz logo",
                 modifier = modifier
                     .padding(bottom = 20.dp)
+                    .fillMaxWidth()
+                    .weight(1f)
             )
         }
     }
@@ -91,16 +93,16 @@ fun HomePageCards (text: String, color: Color, picture: Painter, modifier: Modif
 
 
 
-@Preview(showBackground = true)
-@Composable
-fun CardPreview() {
-    FinalCard(listOf("Apple", "Banana", "Orange", "Pear", "Kiwi"))
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun CardPreview() {
+//    FinalCard(listOf("Apple", "Banana", "Orange", "Pear", "Kiwi"))
+//}
 
 
-// @Preview(showBackground = true)
-// @Composable
-// fun HomePageCardsPreview() {
-//     LingleTheme {
-//         HomePageCards("HELLO ANDROID!", color = Color.Red, picture = painterResource(id = R.drawable.fruits)) }
-// }
+ @Preview(showBackground = true)
+ @Composable
+ fun HomePageCardsPreview() {
+     LingleTheme {
+         HomePageCards("HELLO ANDROID!", color = Color.Red, picture = painterResource(id = R.drawable.fruits)) }
+ }
