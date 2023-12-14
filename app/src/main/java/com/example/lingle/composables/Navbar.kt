@@ -48,6 +48,7 @@ fun Navbar(navController: NavHostController) {
             .fillMaxWidth()
             .padding(33.33.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Logo("Lingle")
         HomeIcon(navController)
