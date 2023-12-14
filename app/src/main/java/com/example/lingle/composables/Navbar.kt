@@ -19,14 +19,18 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.lingle.R
 import com.example.lingle.ui.theme.DarkTurquoise
+import com.example.lingle.ui.theme.LingleTheme
 
 @Composable
 fun Navbar(navController: NavHostController) {
@@ -36,7 +40,7 @@ fun Navbar(navController: NavHostController) {
         ),
             contentDescription = "navbar light blue background",
             contentScale = ContentScale.FillBounds,
-            modifier = Modifier.fillMaxWidth().height(160.dp)
+            modifier = Modifier.fillMaxWidth().height(160.dp).align(Alignment.BottomCenter)
         )
     }
     Row(
@@ -76,5 +80,15 @@ fun HomeIcon(navController: NavHostController) {
             contentDescription = "Home icon",
             modifier = Modifier.size(50.dp)
         )
+    }
+}
+
+@Preview(showBackground = true)
+
+@Composable
+fun GreetingPreview() {
+    val navController = rememberNavController()
+    LingleTheme {
+        Navbar(navController = navController)
     }
 }

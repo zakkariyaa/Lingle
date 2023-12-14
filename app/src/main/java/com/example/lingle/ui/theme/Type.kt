@@ -22,11 +22,12 @@ val Typography = Typography(
         letterSpacing = 0.5.sp
     ),
     titleLarge = TextStyle(
-        fontFamily = FontFamily.Default,
+        fontFamily = fonts,
         fontWeight = FontWeight.Normal,
-        fontSize = 42.sp,
+        fontSize = 50.sp,
         lineHeight = 28.sp,
-        letterSpacing = 0.sp
+        letterSpacing = 0.sp,
+        color = DarkTurquoise
     )
 //    labelSmall = TextStyle(
 //        fontFamily = FontFamily.Default,
