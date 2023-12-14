@@ -21,6 +21,8 @@ import com.example.lingle.R
 import com.example.lingle.composables.FinalCard
 import com.example.lingle.composables.NewGameButton
 import com.example.lingle.composables.SubHeadingText
+import com.example.lingle.ui.theme.darkOrange
+import com.example.lingle.ui.theme.lightOrange
 
 
 // Layout of the final screen of the game
@@ -99,7 +101,7 @@ fun FakeNavBar(modifier: Modifier = Modifier) {
 @Composable
 fun FinalScreenPreview() {
     FinalScreenLayout(
-        startColour = Color(0xFFFFF0C5),
-        endColour = Color(0xFFFFBF00)
+        startColour = lightOrange,
+        endColour = darkOrange
     )
 }
