@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Lingle</string>
+    <string name="choose_category">Pick a Category</string>
     <string name="category_title">Fruits</string>
     <string name="final_message">Well done!</string>
     <string name="new_game">New Game</string>
