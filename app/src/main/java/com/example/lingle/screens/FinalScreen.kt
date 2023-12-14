@@ -17,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.lingle.Item
 import com.example.lingle.R
 import com.example.lingle.composables.FinalCard
 import com.example.lingle.composables.NewGameButton
@@ -29,7 +30,30 @@ import com.example.lingle.ui.theme.lightOrange
 @Composable
 fun FinalScreenLayout(startColour: Color, endColour: Color, modifier: Modifier = Modifier) {
 
-    val fakeItemsList = listOf("Apple", "Banana", "Orange", "Pear", "Kiwi")
+//    val fakeItemsList = listOf("Apple", "Banana", "Orange", "Pear", "Kiwi")
+
+    val items = arrayListOf(
+        Item(
+            "Apple",
+            "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/1_kjyk3h.png"
+        ),
+        Item(
+            "Pear",
+            "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/5_qbaizz.png"
+        ),
+        Item(
+            "Orange",
+            "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/2_ymvg5d.png"
+        ),
+        Item(
+            "Strawberry",
+            "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/3_kiv5du.png"
+        ),
+        Item(
+            "Banana",
+            "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/4_w6aicq.png"
+        )
+    )
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -60,7 +84,7 @@ fun FinalScreenLayout(startColour: Color, endColour: Color, modifier: Modifier =
             .weight(0.5f)
         )
         FinalCard(
-            itemList = fakeItemsList,
+            itemList = items,
             modifier = modifier.weight(4f)
         )
         Spacer(modifier = modifier
