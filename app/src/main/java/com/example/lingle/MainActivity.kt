@@ -12,6 +12,10 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.lingle.screens.FinalScreenLayout
+import com.example.lingle.ui.theme.LingleTheme
+import com.example.lingle.ui.theme.darkOrange
+import com.example.lingle.ui.theme.lightOrange
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.navigation.compose.NavHost
@@ -34,13 +38,21 @@ import com.example.lingle.ui.theme.LightTurquoise
 import com.example.lingle.ui.theme.LingleTheme
 import com.example.lingle.utils.randomItems
 
-
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
             LingleTheme {
+//                 Surface(
+//                     modifier = Modifier.fillMaxSize(),
+//                     color = MaterialTheme.colorScheme.background
+//                 ) {
+// //                    HomePage()
+//                     FinalScreenLayout(
+//                         startColour = lightOrange,
+//                         endColour = darkOrange
+//                     )
                 val navController = rememberNavController()
                 val offsetY = (-50).dp
                 Column(modifier = Modifier.fillMaxSize()) {
@@ -100,6 +112,11 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     LingleTheme {
+// //        HomePage()
+//         FinalScreenLayout(
+//             startColour = lightOrange,
+//             endColour = darkOrange
+//         )
         val navController = rememberNavController()
         val offsetY = (-50).dp
         Column(modifier = Modifier) {
