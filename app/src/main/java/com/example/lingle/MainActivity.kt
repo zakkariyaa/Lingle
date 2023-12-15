@@ -32,6 +32,7 @@ import com.example.lingle.ui.theme.LightPurple
 import com.example.lingle.ui.theme.LightRed
 import com.example.lingle.ui.theme.LightTurquoise
 import com.example.lingle.ui.theme.LingleTheme
+import com.example.lingle.utils.Item
 import com.example.lingle.utils.randomItems
 
 class MainActivity : ComponentActivity() {
@@ -89,7 +90,15 @@ class MainActivity : ComponentActivity() {
                             composable("complete") {
                                 val startColour: Color = LightTurquoise
                                 val endColour: Color = DarkTurquoise
+                                val items = arrayListOf(
+                                    Item("Apple", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/1_kjyk3h.png"),
+                                    Item("Pear", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/5_qbaizz.png"),
+                                    Item("Orange", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/2_ymvg5d.png"),
+                                    Item("Strawberry", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/3_kiv5du.png"),
+                                    Item("Banana", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/4_w6aicq.png")
+                                )
                                 FinalScreenLayout(
+                                    items,
                                     startColour,
                                     endColour,
                                     navController = navController,
@@ -143,6 +152,7 @@ fun GreetingPreview() {
                     composable("home") { HomePage(navController = navController, modifier = Modifier) }
                     composable("complete") {
                         FinalScreenLayout(
+                            itemList = items,
                             navController = navController,
                             startColour = LightOrange,
                             endColour = DarkOrange,

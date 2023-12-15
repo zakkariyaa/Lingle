@@ -13,8 +13,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.lingle.Item
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.lingle.R
@@ -28,7 +26,7 @@ import com.example.lingle.utils.Item
 
 // Layout of the final screen of the game
 @Composable
-fun FinalScreenLayout(itemList: ArrayList<Item>, startColour: Color, endColour: Color, modifier: Modifier = Modifier) {
+fun FinalScreenLayout(itemList: ArrayList<Item>, startColour: Color, endColour: Color, navController: NavHostController, modifier: Modifier = Modifier) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
@@ -66,6 +64,7 @@ fun FinalScreenLayout(itemList: ArrayList<Item>, startColour: Color, endColour: 
 @Preview(showBackground = true)
 @Composable
 fun FinalScreenPreview() {
+    val navController = rememberNavController()
     val items = arrayListOf(
         Item("Apple", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/1_kjyk3h.png"),
         Item("Pear", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/5_qbaizz.png"),
@@ -75,6 +74,7 @@ fun FinalScreenPreview() {
     )
 
     FinalScreenLayout(
+        itemList = items,
         navController = navController,
         startColour = LightOrange,
         endColour = DarkOrange
