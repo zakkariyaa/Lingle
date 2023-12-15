@@ -10,10 +10,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.lingle.screens.FinalScreenLayout
-import com.example.lingle.ui.theme.LingleTheme
-import com.example.lingle.ui.theme.darkOrange
-import com.example.lingle.ui.theme.lightOrange
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.navigation.compose.NavHost
@@ -43,6 +39,15 @@ class MainActivity : ComponentActivity() {
 //                     )
                 val navController = rememberNavController()
                 val offsetY = (-50).dp
+
+                val items = arrayListOf(
+                    Item("Apple", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/1_kjyk3h.png"),
+                    Item("Pear", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/5_qbaizz.png"),
+                    Item("Orange", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/2_ymvg5d.png"),
+                    Item("Strawberry", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/3_kiv5du.png"),
+                    Item("Banana", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/4_w6aicq.png")
+                )
+
                 Column {
                     Box(modifier = Modifier.zIndex(2f)) {
                         Navbar(navController = navController)
@@ -55,12 +60,14 @@ class MainActivity : ComponentActivity() {
                     ) {
                         NavHost(
                             navController = navController,
-                            startDestination = "home",
-                        ) {
+//                            startDestination = "home",
+                            startDestination = "complete",
+                            ) {
                             composable("home") { HomePage(navController = navController, modifier = Modifier) }
                             composable("complete") {
                                 FinalScreenLayout(
-                                    navController = navController,
+//                                    navController = navController,
+                                    itemList = items,
                                     startColour = lightOrange,
                                     endColour = darkOrange,
                                     modifier = Modifier)
@@ -85,6 +92,15 @@ fun GreetingPreview() {
 //         )
         val navController = rememberNavController()
         val offsetY = (-50).dp
+
+        val items = arrayListOf(
+            Item("Apple", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/1_kjyk3h.png"),
+            Item("Pear", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/5_qbaizz.png"),
+            Item("Orange", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/2_ymvg5d.png"),
+            Item("Strawberry", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/3_kiv5du.png"),
+            Item("Banana", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/4_w6aicq.png")
+        )
+
         Column(modifier = Modifier) {
             Box(modifier = Modifier.zIndex(2f)) {
                 Navbar(navController = navController)
@@ -104,7 +120,8 @@ fun GreetingPreview() {
                     composable("home") { HomePage(navController = navController, modifier = Modifier) }
                     composable("complete") {
                         FinalScreenLayout(
-                            navController = navController,
+//                            navController = navController,
+                            itemList = items,
                             startColour = lightOrange,
                             endColour = darkOrange,
                             modifier = Modifier)
