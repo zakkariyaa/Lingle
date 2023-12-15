@@ -205,9 +205,11 @@ fun HomePageCards (
         ){
             Text(
                 text = category,
+                fontSize = 25.sp,
                 modifier = modifier
                     .padding(top = 30.dp)
                     .align(Alignment.CenterHorizontally)
+                    .weight(1f)
             )
             Image(
                 painter = picture,
@@ -215,7 +217,7 @@ fun HomePageCards (
                 modifier = modifier
                     .padding(bottom = 20.dp)
                     .fillMaxWidth()
-                    .weight(1f)
+                    .weight(3f)
             )
         }
     }

@@ -73,7 +73,9 @@ fun HomePage(navController: NavHostController, modifier: Modifier) {
             )
         }
         Row (modifier = modifier
-            .weight(1f)){
+            .weight(1f)
+            .padding(10.dp)
+        ){
             HomePageCards(
                 navController = navController,
                 category = "Vegetables",
