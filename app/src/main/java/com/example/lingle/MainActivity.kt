@@ -64,7 +64,7 @@ class MainActivity : ComponentActivity() {
                         NavHost(
                             navController = navController,
                             startDestination = "home",
-                        ) {
+                            ) {
                             composable("home") { HomePage(navController = navController, modifier = Modifier) }
                             composable("item/{category}") {
                                 backStackEntry ->
@@ -115,6 +115,15 @@ fun GreetingPreview() {
 //         )
         val navController = rememberNavController()
         val offsetY = (-50).dp
+
+        val items = arrayListOf(
+            Item("Apple", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/1_kjyk3h.png"),
+            Item("Pear", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/5_qbaizz.png"),
+            Item("Orange", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/2_ymvg5d.png"),
+            Item("Strawberry", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/3_kiv5du.png"),
+            Item("Banana", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/4_w6aicq.png")
+        )
+
         Column(modifier = Modifier) {
             Box(modifier = Modifier.zIndex(2f)) {
                 Navbar(navController = navController)

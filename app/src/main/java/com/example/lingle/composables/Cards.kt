@@ -148,6 +148,7 @@ fun FinalCard(itemList: ArrayList<Item>, modifier: Modifier = Modifier) {
         elevation = CardDefaults.cardElevation(16.dp),
         modifier = modifier
             .fillMaxWidth()
+            .padding(20.dp)
     )
     {
         Column(verticalArrangement = Arrangement.Center,
