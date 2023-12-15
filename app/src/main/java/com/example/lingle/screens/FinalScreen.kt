@@ -17,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.lingle.Item
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.lingle.R
@@ -31,7 +32,30 @@ import com.example.lingle.ui.theme.lightOrange
 @Composable
 fun FinalScreenLayout(startColour: Color, endColour: Color, navController: NavHostController, modifier: Modifier = Modifier) {
 
-    val fakeItemsList = listOf("Apple", "Banana", "Orange", "Pear", "Kiwi")
+//    val fakeItemsList = listOf("Apple", "Banana", "Orange", "Pear", "Kiwi")
+
+    val items = arrayListOf(
+        Item(
+            "Apple",
+            "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/1_kjyk3h.png"
+        ),
+        Item(
+            "Pear",
+            "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/5_qbaizz.png"
+        ),
+        Item(
+            "Orange",
+            "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/2_ymvg5d.png"
+        ),
+        Item(
+            "Strawberry",
+            "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/3_kiv5du.png"
+        ),
+        Item(
+            "Banana",
+            "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/4_w6aicq.png"
+        )
+    )
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -52,8 +76,11 @@ fun FinalScreenLayout(startColour: Color, endColour: Color, navController: NavHo
             modifier = modifier.weight(1f)
         )
         FinalCard(
-            itemList = fakeItemsList,
-            modifier = modifier.weight(4f).padding(20.dp)
+            itemList = items,
+            modifier = modifier.weight(4f)
+        )
+        Spacer(modifier = modifier
+            .weight(0.5f)
         )
         NewGameButton(modifier = modifier.weight(0.6f))
         Spacer(modifier = modifier
