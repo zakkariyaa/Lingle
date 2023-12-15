@@ -68,6 +68,6 @@ fun NextButton(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 fun ButtonPreview() {
-    NewGameButton()
+//    NewGameButton()
     NextButton()
 }
