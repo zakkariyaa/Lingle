@@ -23,8 +23,8 @@ import com.example.lingle.R
 import com.example.lingle.composables.FinalCard
 import com.example.lingle.composables.NewGameButton
 import com.example.lingle.composables.SubHeadingText
-import com.example.lingle.ui.theme.darkOrange
-import com.example.lingle.ui.theme.lightOrange
+import com.example.lingle.ui.theme.DarkOrange
+import com.example.lingle.ui.theme.LightOrange
 
 
 // Layout of the final screen of the game
@@ -91,7 +91,7 @@ fun FinalScreenPreview() {
     val navController = rememberNavController()
     FinalScreenLayout(
         navController = navController,
-        startColour = lightOrange,
-        endColour = darkOrange
+        startColour = LightOrange,
+        endColour = DarkOrange
     )
 }

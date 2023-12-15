@@ -26,7 +26,6 @@ fun ItemScreen(
     endColour: Color,
     navController: NavHostController,
     modifier: Modifier = Modifier) {
-    println(randomItems)
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
@@ -41,7 +40,6 @@ fun ItemScreen(
             )
             .padding(20.dp)
     ) {
-
         Spacer(modifier = modifier
             .weight(0.5f)
         )
@@ -53,7 +51,7 @@ fun ItemScreen(
             )
         }
         Spacer(modifier = modifier
-            .height(5.dp)
+            .height(10.dp)
         )
         randomItems?.get(0)?.let {
             ItemCard(

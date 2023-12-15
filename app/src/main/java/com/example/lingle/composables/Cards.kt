@@ -63,22 +63,21 @@ fun ItemCard(name: String, image: String, modifier: Modifier = Modifier) {
         ) {
             Text(
                 text = "$name",
-                fontSize = 25.sp,
+                fontSize = 40.sp,
                 textAlign = TextAlign.Center,
-                color = Color.Black,
-                modifier = Modifier
-                    .padding(10.dp)
             )
             AsyncImage(
                 model = image,
                 contentDescription = name,
+                modifier = Modifier
+                    .size(300.dp).padding(20.dp)
             )
             val soundImage = painterResource(R.drawable.voice)
             Image(
                 painter = soundImage,
                 contentDescription = "Volume",
                 modifier = Modifier
-                    .size(50.dp)
+                    .size(55.dp)
             )
         }
     }
@@ -115,13 +114,13 @@ fun FinalCard(itemList: List<String>, modifier: Modifier = Modifier) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomePageCards (
-    text: String,
+    category: String,
     color: Color,
     picture: Painter,
     navController: NavHostController,
     modifier: Modifier = Modifier) {
 
-    Card(onClick = { navController.navigate("item/${text}") },
+    Card(onClick = { navController.navigate("item/${category}") },
         colors = CardDefaults.cardColors(color),
         border = BorderStroke(3.dp, Color.White),
         elevation = CardDefaults.cardElevation(16.dp),
@@ -134,7 +133,7 @@ fun HomePageCards (
             verticalArrangement = Arrangement.Center
         ){
             Text(
-                text = text,
+                text = category,
                 modifier = modifier
                     .padding(top = 30.dp)
                     .align(Alignment.CenterHorizontally)

@@ -11,10 +11,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,6 +22,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.lingle.R
 import com.example.lingle.composables.HomePageCards
 import com.example.lingle.composables.SubHeadingText
+import com.example.lingle.ui.theme.DarkTurquoise
+import com.example.lingle.ui.theme.LightTurquoise
 import com.example.lingle.ui.theme.LingleTheme
 
 
@@ -33,14 +33,11 @@ fun HomePage(navController: NavHostController, modifier: Modifier) {
         modifier = Modifier
             .fillMaxSize()
             .background(
-                brush = Brush.linearGradient(
-                    colors = listOf(
-                        Color(0xFFB5FFFB),
-                        Color(0xFF07A69E)
+                Brush.verticalGradient(
+                    listOf(
+                        LightTurquoise,
+                        DarkTurquoise
                     ),
-                    start = Offset(0f, 0f),
-                    end = Offset(1f, 0f),
-                    tileMode = TileMode.Clamp
                 )
             )
             .padding(top = 80.dp)
@@ -59,7 +56,7 @@ fun HomePage(navController: NavHostController, modifier: Modifier) {
         {
             HomePageCards(
                 navController = navController,
-                text = "Fruits",
+                category = "Fruits",
                 color = Color(0xFFFFC824),
                 picture = painterResource(id = R.drawable.fruits),
                 modifier = modifier
@@ -68,7 +65,7 @@ fun HomePage(navController: NavHostController, modifier: Modifier) {
 
             HomePageCards(
                 navController = navController,
-                text = "Colours",
+                category = "Colours",
                 color = Color(0xFFC08EC9),
                 picture = painterResource(id = R.drawable.colours),
                 modifier = modifier
@@ -79,7 +76,7 @@ fun HomePage(navController: NavHostController, modifier: Modifier) {
             .weight(1f)){
             HomePageCards(
                 navController = navController,
-                text = "Vegetables",
+                category = "Vegetables",
                 color = Color(0xFF00D572),
                 picture = painterResource(id = R.drawable.vegetables),
                 modifier = modifier
@@ -88,7 +85,7 @@ fun HomePage(navController: NavHostController, modifier: Modifier) {
 
             HomePageCards(
                 navController = navController,
-                text = "Animals",
+                category = "Animals",
                 color = Color(0xFFFF5959),
                 picture = painterResource(id = R.drawable.animals),
                 modifier = modifier
