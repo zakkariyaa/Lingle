@@ -56,12 +56,10 @@ fun ItemScreen(
             .height(5.dp)
         )
         randomItems?.get(0)?.let {
-            randomItems?.get(0)?.let { it1 ->
-                ItemCard(
-                    name = it.name,
-                    image = it1.imgUrl,
-                )
-            }
+            ItemCard(
+                name = it.name,
+                image = it.imgUrl,
+            )
         }
         Spacer(modifier = modifier
             .height(25.dp)
