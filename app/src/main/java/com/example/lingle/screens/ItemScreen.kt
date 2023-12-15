@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -31,8 +32,9 @@ fun ItemScreen(
     navController: NavHostController,
     modifier: Modifier = Modifier) {
 
-    var isFlipped by remember { mutableStateOf(false) }
     var onCardFlipped by remember { mutableStateOf(false) }
+    var currentItemIndex by remember { mutableIntStateOf(0) }
+
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -61,23 +63,27 @@ fun ItemScreen(
         Spacer(modifier = modifier
             .height(10.dp)
         )
-        randomItems?.get(0)?.let {
-            ItemCard(
-                name = it.name,
-                image = it.imgUrl,
-                onCardFlipped = { false }
-            )
-            run {
+        randomItems?.let {
+            if (it.isNotEmpty()) {
+                ItemCard(
+                    name = it[currentItemIndex].name,
+                    image = it[currentItemIndex].imgUrl,
+                    onCardClick = {
+                        onCardFlipped = !onCardFlipped
+                    }
+                )
+                Spacer(
+                    modifier = modifier
+                        .height(25.dp)
+                )
                 if (onCardFlipped) {
-                    NextButton()
+                    NextButton(
+                        onButtonClick = {
+                        currentItemIndex = (currentItemIndex + 1) % it.size
+                        onCardFlipped = !onCardFlipped
+                    }
+                    )
                 }
-            }
-            Spacer(
-                modifier = modifier
-                    .height(25.dp)
-            )
-            if (isFlipped) {
-                NextButton()
             }
         }
 
@@ -94,8 +100,8 @@ fun ItemScreen(
 //fun ItemScreenPreview() {
 //    val navController = rememberNavController()
 //    ItemScreen(
-//        startColour = lightOrange,
-//        endColour = darkOrange,
+//        startColour = LightOrange,
+//        endColour = DarkOrange,
 //        navController = navController,
 //        )
 //}

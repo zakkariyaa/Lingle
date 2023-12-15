@@ -10,6 +10,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -40,9 +41,15 @@ fun NewGameButton(modifier: Modifier = Modifier) {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NextButton(modifier: Modifier = Modifier) {
+fun NextButton(onButtonClick: () -> Unit, modifier: Modifier = Modifier) {
+
+
     Card(
+        onClick = {
+            onButtonClick()
+        },
         colors = CardDefaults.cardColors(
             containerColor = Color.Transparent,
         ),
@@ -64,10 +71,14 @@ fun NextButton(modifier: Modifier = Modifier) {
     }
 }
 
+fun onButtonClick() {
+
+}
+
 
 @Preview
 @Composable
 fun ButtonPreview() {
 //    NewGameButton()
-    NextButton()
+//    NextButton()
 }
