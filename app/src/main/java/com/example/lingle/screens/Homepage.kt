@@ -58,6 +58,7 @@ fun HomePage(navController: NavHostController, modifier: Modifier) {
         )
         {
             HomePageCards(
+                navController = navController,
                 text = "Fruits",
                 color = Color(0xFFFFC824),
                 picture = painterResource(id = R.drawable.fruits),
@@ -66,6 +67,7 @@ fun HomePage(navController: NavHostController, modifier: Modifier) {
             )
 
             HomePageCards(
+                navController = navController,
                 text = "Colours",
                 color = Color(0xFFC08EC9),
                 picture = painterResource(id = R.drawable.colours),
@@ -76,6 +78,7 @@ fun HomePage(navController: NavHostController, modifier: Modifier) {
         Row (modifier = modifier
             .weight(1f)){
             HomePageCards(
+                navController = navController,
                 text = "Vegetables",
                 color = Color(0xFF00D572),
                 picture = painterResource(id = R.drawable.vegetables),
@@ -84,6 +87,7 @@ fun HomePage(navController: NavHostController, modifier: Modifier) {
             )
 
             HomePageCards(
+                navController = navController,
                 text = "Animals",
                 color = Color(0xFFFF5959),
                 picture = painterResource(id = R.drawable.animals),

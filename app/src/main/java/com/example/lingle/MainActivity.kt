@@ -18,9 +18,12 @@ import androidx.navigation.compose.rememberNavController
 import com.example.lingle.composables.Navbar
 import com.example.lingle.screens.FinalScreenLayout
 import com.example.lingle.screens.HomePage
+import com.example.lingle.screens.ItemScreen
 import com.example.lingle.ui.theme.LingleTheme
 import com.example.lingle.ui.theme.darkOrange
 import com.example.lingle.ui.theme.lightOrange
+import com.example.lingle.utils.Item
+import com.example.lingle.utils.randomItems
 
 
 class MainActivity : ComponentActivity() {
@@ -31,7 +34,8 @@ class MainActivity : ComponentActivity() {
             LingleTheme {
                 val navController = rememberNavController()
                 val offsetY = (-50).dp
-                Column {
+                val randomItems: ArrayList<Item>;
+                Column(modifier = Modifier.fillMaxSize()) {
                     Box(modifier = Modifier.zIndex(2f)) {
                         Navbar(navController = navController)
                     }
@@ -46,6 +50,16 @@ class MainActivity : ComponentActivity() {
                             startDestination = "home",
                         ) {
                             composable("home") { HomePage(navController = navController, modifier = Modifier) }
+                            composable("item/{category}") {
+                                backStackEntry ->
+                                ItemScreen(
+                                    backStackEntry.arguments?.getString("category"),
+                                    randomItems = randomItems(backStackEntry.arguments?.getString("category")),
+                                    navController = navController,
+                                    startColour = lightOrange,
+                                    endColour = darkOrange,
+                                    modifier = Modifier)
+                            }
                             composable("complete") {
                                 FinalScreenLayout(
                                     navController = navController,

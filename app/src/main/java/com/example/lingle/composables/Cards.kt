@@ -27,11 +27,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import coil.compose.AsyncImage
 import com.example.lingle.R
 import com.example.lingle.ui.theme.LingleTheme
 
 @Composable
-fun ItemCard(name: String, modifier: Modifier = Modifier) {
+fun ItemCard(name: String, image: String, modifier: Modifier = Modifier) {
 //    var isClicked by remember { mutableStateOf(false) }
     OutlinedCard(
 //        onClick = {isClicked = !isClicked},
@@ -62,13 +65,10 @@ fun ItemCard(name: String, modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .padding(10.dp)
             )
-
-            val appleImage = painterResource(R.drawable.apple)
-            Image(
-                painter = appleImage,
-                contentDescription = "Apple"
+            AsyncImage(
+                model = image,
+                contentDescription = name,
             )
-
             val soundImage = painterResource(R.drawable.voice)
             Image(
                 painter = soundImage,
@@ -110,9 +110,14 @@ fun FinalCard(itemList: List<String>, modifier: Modifier = Modifier) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomePageCards (text: String, color: Color, picture: Painter, modifier: Modifier = Modifier) {
+fun HomePageCards (
+    text: String,
+    color: Color,
+    picture: Painter,
+    navController: NavHostController,
+    modifier: Modifier = Modifier) {
 
-    Card(onClick = { /*TODO*/ },
+    Card(onClick = { navController.navigate("item/${text}") },
         colors = CardDefaults.cardColors(color),
         border = BorderStroke(3.dp, Color.White),
         elevation = CardDefaults.cardElevation(16.dp),
@@ -163,7 +168,8 @@ fun HomePageCards (text: String, color: Color, picture: Painter, modifier: Modif
  @Preview(showBackground = true)
  @Composable
  fun HomePageCardsPreview() {
+     val navController = rememberNavController()
      LingleTheme {
-         HomePageCards("HELLO ANDROID!", color = Color.Red, picture = painterResource(id = R.drawable.fruits)) }
+         HomePageCards("HELLO ANDROID!", color = Color.Red, picture = painterResource(id = R.drawable.fruits), navController = navController) }
  }
 
