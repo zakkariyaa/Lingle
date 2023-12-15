@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_EXPRESSION")
+
 package com.example.lingle.composables
 
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -13,7 +15,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -34,22 +35,19 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import com.example.lingle.Item
 import com.example.lingle.R
-import com.example.lingle.ui.theme.LingleTheme
+import com.example.lingle.utils.Item
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ItemCard(name: String, modifier: Modifier = Modifier, onCardFlipped: () -> Boolean ) {
-
+fun ItemCard(name: String, image: String, modifier: Modifier = Modifier, onCardFlipped: () -> Boolean) {
     var isFlipped by remember { mutableStateOf(false) }
     val density = LocalDensity.current.density
-
-
+  
     val rotationY by animateFloatAsState(
         targetValue = if (isFlipped) 180f else 0f,
         animationSpec = tween(
@@ -57,10 +55,10 @@ fun ItemCard(name: String, modifier: Modifier = Modifier, onCardFlipped: () -> B
             easing = FastOutSlowInEasing
         ), label = "Card Flip Animation"
     )
-    OutlinedCard(
+  OutlinedCard(
         onClick = {
             isFlipped = !isFlipped
-            onCardFlipped
+//            onCardFlipped
         },
         colors = CardDefaults.cardColors(
             containerColor = Color.White,
@@ -86,32 +84,30 @@ fun ItemCard(name: String, modifier: Modifier = Modifier, onCardFlipped: () -> B
         ) {
             if (isFlipped) {
                 Text(
-                    text = "$name",
-                    fontSize = 25.sp,
+                    text = name,
+                    fontSize = 40.sp,
                     textAlign = TextAlign.Center,
-                    color = Color.Black,
                     modifier = Modifier
                         .padding(10.dp)
                         .graphicsLayer(
                             rotationY = 180f
                         )
                 )
-                val appleImage = painterResource(R.drawable.apple)
-                Image(
-                    painter = appleImage,
-                    contentDescription = "Apple",
-                    modifier = modifier
-                        .graphicsLayer(
+                AsyncImage(
+                  model = image,
+                  contentDescription = name,
+                  modifier = Modifier
+                      .size(300.dp).padding(20.dp)
+                      .graphicsLayer(
                             rotationY = 180f
                         )
-                )
-
+            )
                 val soundImage = painterResource(R.drawable.voice)
                 Image(
                     painter = soundImage,
                     contentDescription = "Volume",
                     modifier = Modifier
-                        .size(50.dp)
+                        .size(55.dp)
                         .graphicsLayer(
                             rotationY = 180f
                         )
@@ -127,13 +123,16 @@ fun ItemCard(name: String, modifier: Modifier = Modifier, onCardFlipped: () -> B
                         .padding(10.dp)
 
                 )
-                val appleImage = painterResource(R.drawable.apple)
-                Image(
-                    painter = appleImage,
-                    contentDescription = "Apple"
-                )
+                AsyncImage(
+                  model = image,
+                  contentDescription = name,
+                  modifier = Modifier
+                      .size(300.dp).padding(20.dp)
+                      .graphicsLayer(
+                            rotationY = 180f
+                        )
+            )
             }
-
         }
     }
 }
@@ -169,11 +168,6 @@ fun FinalCard(itemList: ArrayList<Item>, modifier: Modifier = Modifier) {
                         model = it.imgUrl,
                         contentDescription = it.name
                     )
-                    // Image for preview
-    //                Image(
-    //                    painter = painterResource(id = R.drawable.colours),
-    //                    contentDescription = it.name
-    //                )
                     Text(
                         text = it.name,
                         fontSize = 30.sp,
@@ -191,9 +185,14 @@ fun FinalCard(itemList: ArrayList<Item>, modifier: Modifier = Modifier) {
 // Card to show category, on homepage screen
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomePageCards (text: String, color: Color, picture: Painter, modifier: Modifier = Modifier) {
+fun HomePageCards (
+    category: String,
+    color: Color,
+    picture: Painter,
+    navController: NavHostController,
+    modifier: Modifier = Modifier) {
 
-    Card(onClick = { /*TODO*/ },
+    Card(onClick = { navController.navigate("item/${category}") },
         colors = CardDefaults.cardColors(color),
         border = BorderStroke(3.dp, Color.White),
         elevation = CardDefaults.cardElevation(16.dp),
@@ -206,7 +205,7 @@ fun HomePageCards (text: String, color: Color, picture: Painter, modifier: Modif
             verticalArrangement = Arrangement.Center
         ){
             Text(
-                text = text,
+                text = category,
                 modifier = modifier
                     .padding(top = 30.dp)
                     .align(Alignment.CenterHorizontally)
@@ -226,34 +225,38 @@ fun HomePageCards (text: String, color: Color, picture: Painter, modifier: Modif
 
 
 
-@Preview(showBackground = true)
-@Composable
-fun CardPreview() {
-    FinalCard(
-        arrayListOf
-            (
-        Item("Apple", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/1_kjyk3h.png"),
-        Item("Pear", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/5_qbaizz.png"),
-        Item(
-            "Orange",
-            "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/2_ymvg5d.png"
-        ),
-        Item(
-            "Strawberry",
-            "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/3_kiv5du.png"
-        ),
-        Item("Banana", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/4_w6aicq.png")
-        )
-    )
-}
+// @Preview(showBackground = true)
+// @Composable
+// fun CardPreview() {
+//     FinalCard(
+//         arrayListOf
+//             (
+//         Item("Apple", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/1_kjyk3h.png"),
+//         Item("Pear", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/5_qbaizz.png"),
+//         Item(
+//             "Orange",
+//             "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/2_ymvg5d.png"
+//         ),
+//         Item(
+//             "Strawberry",
+//             "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/3_kiv5du.png"
+//         ),
+//         Item("Banana", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/4_w6aicq.png")
+//         )
+//     )
+// }
 
- @Preview(showBackground = true)
- @Composable
- fun CardsPreview() {
-     LingleTheme {
-         ItemCard(name = "Apple", onCardFlipped = {false})
-     }
- }
+//  @Preview(showBackground = true)
+//  @Composable
+//  fun HomePageCardsPreview() {
+//      val navController = rememberNavController()
+//      LingleTheme {
+//          HomePageCards("HELLO ANDROID!", color = Color.Red, picture = painterResource(id = R.drawable.fruits), navController = navController) }
+//  fun CardsPreview() {
+//      LingleTheme {
+//          ItemCard(name = "Apple", onCardFlipped = {false})
+//      }
+//  }
 
 
 // @Preview(showBackground = true)

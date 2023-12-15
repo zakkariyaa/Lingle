@@ -1,4 +1,4 @@
-package com.example.lingle
+package com.example.lingle.utils
 
 val categories = listOf(
     Category(
