@@ -1,5 +1,8 @@
 package com.example.lingle.composables
 
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -18,10 +21,16 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -33,11 +42,26 @@ import com.example.lingle.Item
 import com.example.lingle.R
 import com.example.lingle.ui.theme.LingleTheme
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ItemCard(name: String, modifier: Modifier = Modifier) {
-//    var isClicked by remember { mutableStateOf(false) }
+fun ItemCard(name: String, modifier: Modifier = Modifier, onCardFlipped: () -> Boolean ) {
+
+    var isFlipped by remember { mutableStateOf(false) }
+    val density = LocalDensity.current.density
+
+
+    val rotationY by animateFloatAsState(
+        targetValue = if (isFlipped) 180f else 0f,
+        animationSpec = tween(
+            durationMillis = 400,
+            easing = FastOutSlowInEasing
+        ), label = "Card Flip Animation"
+    )
     OutlinedCard(
-//        onClick = {isClicked = !isClicked},
+        onClick = {
+            isFlipped = !isFlipped
+            onCardFlipped
+        },
         colors = CardDefaults.cardColors(
             containerColor = Color.White,
         ),
@@ -46,10 +70,13 @@ fun ItemCard(name: String, modifier: Modifier = Modifier) {
         ),
         border = BorderStroke(4.dp, Color.Black),
         modifier = modifier
-//            .clickable { isClicked = !isClicked }
             .fillMaxWidth()
             .height(500.dp)
             .size(width = 240.dp, height = 100.dp)
+            .graphicsLayer(
+                rotationY = rotationY,
+                cameraDistance = 8 * density
+            )
     ) {
         Column(
             modifier = Modifier
@@ -57,28 +84,56 @@ fun ItemCard(name: String, modifier: Modifier = Modifier) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(
-                text = "$name",
-                fontSize = 25.sp,
-                textAlign = TextAlign.Center,
-                color = Color.Black,
-                modifier = Modifier
-                    .padding(10.dp)
-            )
+            if (isFlipped) {
+                Text(
+                    text = "$name",
+                    fontSize = 25.sp,
+                    textAlign = TextAlign.Center,
+                    color = Color.Black,
+                    modifier = Modifier
+                        .padding(10.dp)
+                        .graphicsLayer(
+                            rotationY = 180f
+                        )
+                )
+                val appleImage = painterResource(R.drawable.apple)
+                Image(
+                    painter = appleImage,
+                    contentDescription = "Apple",
+                    modifier = modifier
+                        .graphicsLayer(
+                            rotationY = 180f
+                        )
+                )
 
-            val appleImage = painterResource(R.drawable.apple)
-            Image(
-                painter = appleImage,
-                contentDescription = "Apple"
-            )
+                val soundImage = painterResource(R.drawable.voice)
+                Image(
+                    painter = soundImage,
+                    contentDescription = "Volume",
+                    modifier = Modifier
+                        .size(50.dp)
+                        .graphicsLayer(
+                            rotationY = 180f
+                        )
+                )
 
-            val soundImage = painterResource(R.drawable.voice)
-            Image(
-                painter = soundImage,
-                contentDescription = "Volume",
-                modifier = Modifier
-                    .size(50.dp)
-            )
+            } else {
+                Text(
+                    text = "Guess what this is?",
+                    fontSize = 25.sp,
+                    textAlign = TextAlign.Center,
+                    color = Color.Black,
+                    modifier = Modifier
+                        .padding(10.dp)
+
+                )
+                val appleImage = painterResource(R.drawable.apple)
+                Image(
+                    painter = appleImage,
+                    contentDescription = "Apple"
+                )
+            }
+
         }
     }
 }
@@ -192,19 +247,19 @@ fun CardPreview() {
     )
 }
 
-// @Preview(showBackground = true)
-// @Composable
-// fun CardsPreview() {
-//     LingleTheme {
-//         ItemCard(name = "Apple")
-//     }
-// }
-
-
  @Preview(showBackground = true)
  @Composable
- fun HomePageCardsPreview() {
+ fun CardsPreview() {
      LingleTheme {
-         HomePageCards("HELLO ANDROID!", color = Color.Red, picture = painterResource(id = R.drawable.fruits)) }
+         ItemCard(name = "Apple", onCardFlipped = {false})
+     }
  }
+
+
+// @Preview(showBackground = true)
+// @Composable
+// fun HomePageCardsPreview() {
+//     LingleTheme {
+//         HomePageCards("HELLO ANDROID!", color = Color.Red, picture = painterResource(id = R.drawable.fruits)) }
+// }
 
