@@ -18,6 +18,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.lingle.Item
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.lingle.R
 import com.example.lingle.composables.FinalCard
 import com.example.lingle.composables.NewGameButton
@@ -28,7 +30,7 @@ import com.example.lingle.ui.theme.lightOrange
 
 // Layout of the final screen of the game
 @Composable
-fun FinalScreenLayout(startColour: Color, endColour: Color, modifier: Modifier = Modifier) {
+fun FinalScreenLayout(startColour: Color, endColour: Color, navController: NavHostController, modifier: Modifier = Modifier) {
 
 //    val fakeItemsList = listOf("Apple", "Banana", "Orange", "Pear", "Kiwi")
 
@@ -58,7 +60,6 @@ fun FinalScreenLayout(startColour: Color, endColour: Color, modifier: Modifier =
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
-            .fillMaxSize()
             .background(
                 Brush.verticalGradient(
                     listOf(
@@ -67,21 +68,12 @@ fun FinalScreenLayout(startColour: Color, endColour: Color, modifier: Modifier =
                     )
                 )
             )
-            .padding(20.dp)
+            .padding(top = 80.dp)
+            .fillMaxSize()
     ) {
-
-        FakeNavBar(
-            modifier.weight(1f)
-        )
-        Spacer(modifier = modifier
-            .weight(0.5f)
-        )
         SubHeadingText(
             text = stringResource(id = R.string.final_message),
             modifier = modifier.weight(1f)
-        )
-        Spacer(modifier = modifier
-            .weight(0.5f)
         )
         FinalCard(
             itemList = items,
@@ -91,7 +83,6 @@ fun FinalScreenLayout(startColour: Color, endColour: Color, modifier: Modifier =
             .weight(0.5f)
         )
         NewGameButton(modifier = modifier.weight(0.6f))
-
         Spacer(modifier = modifier
             .weight(0.5f)
         )
@@ -124,7 +115,9 @@ fun FakeNavBar(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun FinalScreenPreview() {
+    val navController = rememberNavController()
     FinalScreenLayout(
+        navController = navController,
         startColour = lightOrange,
         endColour = darkOrange
     )

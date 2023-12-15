@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,15 +16,19 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.lingle.R
 import com.example.lingle.composables.HomePageCards
+import com.example.lingle.composables.SubHeadingText
 import com.example.lingle.ui.theme.LingleTheme
 
 
 @Composable
-fun HomePage(modifier: Modifier = Modifier) {
+fun HomePage(navController: NavHostController, modifier: Modifier) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -40,21 +43,20 @@ fun HomePage(modifier: Modifier = Modifier) {
                     tileMode = TileMode.Clamp
                 )
             )
-            .padding(10.dp)
+            .padding(top = 80.dp)
     ){
-
-        Spacer(modifier = modifier
-            .height(125.dp))
         Box(modifier = modifier
             .align(Alignment.CenterHorizontally)
         ){
-            Text(
-            text = "Pick a Category"
+            SubHeadingText(
+                text = stringResource(id = R.string.choose_category)
             )
         }
         Row (modifier = modifier
-            .weight(1f)){
-
+            .weight(1f)
+            .padding(10.dp)
+        )
+        {
             HomePageCards(
                 text = "Fruits",
                 color = Color(0xFFFFC824),
@@ -93,15 +95,18 @@ fun HomePage(modifier: Modifier = Modifier) {
         Spacer(modifier = modifier
             .height(50.dp))
 
+
     }
 }
 
 
 
 @Preview(showBackground = true)
+
 @Composable
 fun GreetingPreview() {
+    val navController = rememberNavController()
     LingleTheme {
-        HomePage()
+        HomePage(navController = navController, modifier = Modifier)
     }
 }
