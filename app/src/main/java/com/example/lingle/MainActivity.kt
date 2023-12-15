@@ -12,10 +12,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.lingle.screens.FinalScreenLayout
-import com.example.lingle.ui.theme.LingleTheme
-import com.example.lingle.ui.theme.darkOrange
-import com.example.lingle.ui.theme.lightOrange
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.navigation.compose.NavHost

@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_EXPRESSION")
+
 package com.example.lingle.composables
 
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -13,7 +15,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -34,15 +35,12 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
-import com.example.lingle.Item
 import com.example.lingle.R
-import com.example.lingle.ui.theme.LingleTheme
+import com.example.lingle.utils.Item
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -60,7 +58,7 @@ fun ItemCard(name: String, image: String, modifier: Modifier = Modifier, onCardF
   OutlinedCard(
         onClick = {
             isFlipped = !isFlipped
-            onCardFlipped
+//            onCardFlipped
         },
         colors = CardDefaults.cardColors(
             containerColor = Color.White,
@@ -86,11 +84,11 @@ fun ItemCard(name: String, image: String, modifier: Modifier = Modifier, onCardF
         ) {
             if (isFlipped) {
                 Text(
-                    text = "$name",
+                    text = name,
                     fontSize = 40.sp,
                     textAlign = TextAlign.Center,
                     modifier = Modifier
-                        .padding(10.dp
+                        .padding(10.dp)
                         .graphicsLayer(
                             rotationY = 180f
                         )

@@ -65,20 +65,21 @@ fun ItemScreen(
             ItemCard(
                 name = it.name,
                 image = it.imgUrl,
-                onCardFlipped = {false}
+                onCardFlipped = { false }
             )
             run {
-            if (onCardFlipped) {
+                if (onCardFlipped) {
+                    NextButton()
+                }
+            }
+            Spacer(
+                modifier = modifier
+                    .height(25.dp)
+            )
+            if (isFlipped) {
                 NextButton()
             }
         }
-        Spacer(modifier = modifier
-            .height(25.dp)
-        )
-        if (isFlipped){
-            NextButton()
-        }
-
 
     }
 

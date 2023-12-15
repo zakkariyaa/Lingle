@@ -17,7 +17,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.lingle.Item
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.lingle.R
@@ -26,6 +25,7 @@ import com.example.lingle.composables.NewGameButton
 import com.example.lingle.composables.SubHeadingText
 import com.example.lingle.ui.theme.DarkOrange
 import com.example.lingle.ui.theme.LightOrange
+import com.example.lingle.utils.Item
 
 
 // Layout of the final screen of the game
