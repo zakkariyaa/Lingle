@@ -44,7 +44,7 @@ import com.example.lingle.utils.Item
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ItemCard(name: String, image: String, modifier: Modifier = Modifier, onCardFlipped: () -> Boolean) {
+fun ItemCard(name: String, image: String, modifier: Modifier = Modifier, onCardClick: () -> Unit) {
     var isFlipped by remember { mutableStateOf(false) }
     val density = LocalDensity.current.density
   
@@ -55,10 +55,10 @@ fun ItemCard(name: String, image: String, modifier: Modifier = Modifier, onCardF
             easing = FastOutSlowInEasing
         ), label = "Card Flip Animation"
     )
-  OutlinedCard(
+    OutlinedCard(
         onClick = {
             isFlipped = !isFlipped
-//            onCardFlipped
+            onCardClick()
         },
         colors = CardDefaults.cardColors(
             containerColor = Color.White,
@@ -128,9 +128,7 @@ fun ItemCard(name: String, image: String, modifier: Modifier = Modifier, onCardF
                   contentDescription = name,
                   modifier = Modifier
                       .size(300.dp).padding(20.dp)
-                      .graphicsLayer(
-                            rotationY = 180f
-                        )
+
             )
             }
         }
@@ -249,12 +247,12 @@ fun HomePageCards (
 //  @Preview(showBackground = true)
 //  @Composable
 //  fun HomePageCardsPreview() {
-//      val navController = rememberNavController()
+//      val navController = rememberNavContro ller()
 //      LingleTheme {
 //          HomePageCards("HELLO ANDROID!", color = Color.Red, picture = painterResource(id = R.drawable.fruits), navController = navController) }
 //  fun CardsPreview() {
 //      LingleTheme {
-//          ItemCard(name = "Apple", onCardFlipped = {false})
+//          ItemCard(name = "Apple")
 //      }
 //  }
 
