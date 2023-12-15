@@ -6,12 +6,11 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.lingle.screens.HomePage
+import androidx.navigation.compose.rememberNavController
 import com.example.lingle.ui.theme.LingleTheme
+import com.example.lingle.utils.AppNavigation
+import com.example.lingle.utils.randomItems
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,18 +22,19 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    HomePage()
+                    val navController = rememberNavController()
+                    AppNavigation(navController)
                 }
             }
         }
     }
 }
 
-
-@Preview(showBackground = true)
-@Composable
-fun HomePagePreview() {
-    LingleTheme {
-        HomePage()
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun HomePagePreview() {
+//    LingleTheme {
+//        val navController = rememberNavController()
+//        AppNavigation(navController)
+//    }
+//}

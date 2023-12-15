@@ -14,21 +14,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.lingle.R
 import com.example.lingle.composables.FinalCard
 import com.example.lingle.composables.NewGameButton
 import com.example.lingle.composables.SubHeadingText
-import com.example.lingle.ui.theme.darkOrange
-import com.example.lingle.ui.theme.lightOrange
-
 
 // Layout of the final screen of the game
 @Composable
-fun FinalScreenLayout(startColour: Color, endColour: Color, modifier: Modifier = Modifier) {
-
+fun FinalScreenLayout(navController: NavHostController, startColour: Color, endColour: Color, modifier: Modifier = Modifier) {
     val fakeItemsList = listOf("Apple", "Banana", "Orange", "Pear", "Kiwi")
 
     Column(
@@ -75,11 +71,9 @@ fun FinalScreenLayout(startColour: Color, endColour: Color, modifier: Modifier =
 
 }
 
-
 // Fake navbar as a placeholder
 @Composable
 fun FakeNavBar(modifier: Modifier = Modifier) {
-
     Row {
         Text(
             text = "Lingle",
@@ -95,13 +89,11 @@ fun FakeNavBar(modifier: Modifier = Modifier) {
     }
 }
 
-
-
-@Preview(showBackground = true)
-@Composable
-fun FinalScreenPreview() {
-    FinalScreenLayout(
-        startColour = lightOrange,
-        endColour = darkOrange
-    )
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun FinalScreenPreview() {
+//    FinalScreenLayout(
+//        startColour = lightOrange,
+//        endColour = darkOrange
+//    )
+//}

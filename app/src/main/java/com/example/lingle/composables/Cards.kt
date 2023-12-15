@@ -22,13 +22,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.lingle.R
-import com.example.lingle.ui.theme.LingleTheme
+import androidx.navigation.NavHostController
+import com.example.lingle.utils.Item
+import java.util.ArrayList
 
-
-// Card to list all items viewed in current game
 @Composable
 fun FinalCard(itemList: List<String>, modifier: Modifier = Modifier) {
     Card(
@@ -55,19 +52,27 @@ fun FinalCard(itemList: List<String>, modifier: Modifier = Modifier) {
       }
 }
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomePageCards (text: String, color: Color, picture: Painter, modifier: Modifier = Modifier) {
-
-    Card(onClick = { /*TODO*/ },
+fun HomePageCards (
+    text: String,
+    color: Color,
+    picture: Painter,
+    modifier: Modifier = Modifier,
+    navController: NavHostController,
+    items: ArrayList<Item>?
+) {
+    Card(
+        onClick = {
+            navController.navigate("fakeScreen") {
+                putParcelableArrayListExtra("items", items)
+            } },
         colors = CardDefaults.cardColors(color),
         border = BorderStroke(3.dp, Color.White),
         elevation = CardDefaults.cardElevation(16.dp),
         modifier = modifier
             .fillMaxSize()
             .padding(10.dp)
-
     ){
         Column (
             verticalArrangement = Arrangement.Center
@@ -90,19 +95,20 @@ fun HomePageCards (text: String, color: Color, picture: Painter, modifier: Modif
     }
 }
 
-
-
-
 //@Preview(showBackground = true)
 //@Composable
 //fun CardPreview() {
 //    FinalCard(listOf("Apple", "Banana", "Orange", "Pear", "Kiwi"))
 //}
 
-
- @Preview(showBackground = true)
- @Composable
- fun HomePageCardsPreview() {
-     LingleTheme {
-         HomePageCards("HELLO ANDROID!", color = Color.Red, picture = painterResource(id = R.drawable.fruits)) }
- }
+//@Preview(showBackground = true)
+//@Composable
+//fun HomePageCardsPreview() {
+// LingleTheme {
+//     HomePageCards(
+//         "HELLO ANDROID!",
+//         color = Color.Red,
+//         picture = painterResource(id = R.drawable.fruits),
+//         navController = navController
+//     ) }
+//}

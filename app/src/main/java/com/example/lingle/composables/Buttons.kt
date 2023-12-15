@@ -39,7 +39,6 @@ fun NewGameButton(modifier: Modifier = Modifier) {
     }
 }
 
-
 @Preview
 @Composable
 fun ButtonPreview() {

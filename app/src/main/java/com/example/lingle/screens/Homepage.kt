@@ -17,15 +17,14 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.lingle.R
 import com.example.lingle.composables.HomePageCards
-import com.example.lingle.ui.theme.LingleTheme
-
+import com.example.lingle.utils.Item
 
 @Composable
-fun HomePage(modifier: Modifier = Modifier) {
+fun HomePage(navController: NavHostController, randomValues: HashMap<String, ArrayList<Item>?>, modifier: Modifier = Modifier) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -49,7 +48,7 @@ fun HomePage(modifier: Modifier = Modifier) {
             .align(Alignment.CenterHorizontally)
         ){
             Text(
-            text = "Pick a Category"
+                text = "Pick a Category",
             )
         }
         Row (modifier = modifier
@@ -58,6 +57,8 @@ fun HomePage(modifier: Modifier = Modifier) {
             HomePageCards(
                 text = "Fruits",
                 color = Color(0xFFFFC824),
+                navController = navController,
+                items = randomValues["fruits"],
                 picture = painterResource(id = R.drawable.fruits),
                 modifier = modifier
                     .weight(0.5f)
@@ -68,7 +69,9 @@ fun HomePage(modifier: Modifier = Modifier) {
                 color = Color(0xFFC08EC9),
                 picture = painterResource(id = R.drawable.colours),
                 modifier = modifier
-                    .weight(0.5f)
+                    .weight(0.5f),
+                navController = navController,
+                items = randomValues["fruits"]
             )
         }
         Row (modifier = modifier
@@ -78,7 +81,9 @@ fun HomePage(modifier: Modifier = Modifier) {
                 color = Color(0xFF00D572),
                 picture = painterResource(id = R.drawable.vegetables),
                 modifier = modifier
-                    .weight(0.5f)
+                    .weight(0.5f),
+                navController = navController,
+                items = randomValues["fruits"]
             )
 
             HomePageCards(
@@ -86,7 +91,9 @@ fun HomePage(modifier: Modifier = Modifier) {
                 color = Color(0xFFFF5959),
                 picture = painterResource(id = R.drawable.animals),
                 modifier = modifier
-                    .weight(0.5f)
+                    .weight(0.5f),
+                navController = navController,
+                items = randomValues["fruits"]
             )
         }
 
@@ -96,12 +103,10 @@ fun HomePage(modifier: Modifier = Modifier) {
     }
 }
 
-
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    LingleTheme {
-        HomePage()
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun GreetingPreview() {
+//    LingleTheme {
+//        HomePage(navController: NavHostController)
+//    }
+//}
