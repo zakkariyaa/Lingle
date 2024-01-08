@@ -122,7 +122,7 @@ fun ItemCard(name: String, image: String, modifier: Modifier = Modifier, onCardC
                   model = image,
                   contentDescription = name,
                   modifier = Modifier
-                      .size(300.dp)
+                      .size(200.dp)
                       .padding(20.dp)
                       .graphicsLayer(
                           rotationY = 180f

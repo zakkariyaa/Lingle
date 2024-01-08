@@ -129,9 +129,6 @@ fun ItemScreen(
             }
 
         }
-
-
-
     }
 
 }
