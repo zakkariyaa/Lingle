@@ -1,4 +1,4 @@
-package com.example.lingle
+    package com.example.lingle
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

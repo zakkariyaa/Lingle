@@ -39,7 +39,7 @@ fun ItemScreen(
     navController: NavHostController,
     modifier: Modifier = Modifier) {
 
-    var onCardFlipped by remember { mutableStateOf(false) }
+    var isFlipped by remember { mutableStateOf(false) }
     var currentItemIndex by remember { mutableIntStateOf(0) }
 
     Column(
@@ -79,19 +79,21 @@ fun ItemScreen(
                         name = it[currentItemIndex].name,
                         image = it[currentItemIndex].imgUrl,
                         modifier = modifier.weight(8f),
+                        isFlipped = isFlipped,
                         onCardClick = {
-                            onCardFlipped = !onCardFlipped // Can flip back and forth
+                        isFlipped = !isFlipped// Can flip back and forth
                         }
                     )
                     Spacer(
                         modifier = modifier
                             .weight(0.5f)
                     )
-                    if (onCardFlipped) {
+                    if (isFlipped) {
                         NextButton(
+                            isFlipped = isFlipped,
                             onButtonClick = {
                                 currentItemIndex += 1
-                                onCardFlipped = !onCardFlipped // Reset back to false
+                                isFlipped = false // Reset back to false
                             }
                         )
                     }
@@ -123,6 +125,8 @@ fun ItemScreen(
                     Spacer(modifier = modifier
                         .weight(0.5f)
                     )
+                } else {
+                    // Final Screen
                 }
             }
 
