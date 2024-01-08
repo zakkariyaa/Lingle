@@ -75,25 +75,9 @@ fun ItemScreen(
                         isFlipped = !isFlipped
                     }
                 )
-                Spacer(
-                    modifier = modifier
-                        .height(25.dp)
-                )
-                if (isFlipped) {
-                    NextButton(
-                        isFlipped = isFlipped,
-                        onButtonClick = {
-                            if (currentItemIndex < (randomItems.size ?: 0) - 1) {
-                                currentItemIndex++
-                                isFlipped = false
-                            }
-                        }
-                    )
-                } else {
-                    // Final Screen
-                }
-            }
         }
+
+
 
     }
 

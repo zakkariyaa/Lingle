@@ -7,7 +7,9 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -44,7 +46,6 @@ import coil.compose.AsyncImage
 import com.example.lingle.R
 import com.example.lingle.utils.Item
 import java.util.Locale
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -120,20 +121,33 @@ fun ItemCard(name: String, image: String, modifier: Modifier = Modifier, onCardC
                   model = image,
                   contentDescription = name,
                   modifier = Modifier
-                      .size(300.dp).padding(20.dp)
+                      .size(300.dp)
+                      .padding(20.dp)
                       .graphicsLayer(
-                            rotationY = 180f
-                        )
-            )
-                Image(
-                    painter = painterResource(R.drawable.voice),
-                    contentDescription = "Volume",
-                    modifier = Modifier
-                        .size(55.dp)
-                        .graphicsLayer(
-                            rotationY = 180f
-                        )
+                          rotationY = 180f
+                      )
                 )
+
+                Box(
+                    Modifier.clickable {
+                        textToSpeech?.speak(
+                            name,
+                            TextToSpeech.QUEUE_FLUSH,
+                            null,
+                            null
+                        )
+                    }
+                ) {
+                    Image(
+                        painter = painterResource(R.drawable.voice),
+                        contentDescription = "Volume",
+                        modifier = Modifier
+                            .size(55.dp)
+                            .graphicsLayer(
+                                rotationY = 180f
+                            )
+                    )
+                }
 
             } else {
                 Text(
@@ -149,7 +163,8 @@ fun ItemCard(name: String, image: String, modifier: Modifier = Modifier, onCardC
                   model = image,
                   contentDescription = name,
                   modifier = Modifier
-                      .size(300.dp).padding(20.dp)
+                      .size(300.dp)
+                      .padding(20.dp)
                 )
             }
         }
@@ -243,8 +258,6 @@ fun HomePageCards (
         }
     }
 }
-
-
 
 
 // @Preview(showBackground = true)
