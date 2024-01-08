@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -182,7 +183,7 @@ fun FinalCard(itemList: ArrayList<Item>, modifier: Modifier = Modifier) {
         elevation = CardDefaults.cardElevation(16.dp),
         modifier = modifier
             .fillMaxWidth()
-            .padding(20.dp)
+//            .padding(2.dp)
     )
     {
         Column(verticalArrangement = Arrangement.Center,
@@ -201,11 +202,12 @@ fun FinalCard(itemList: ArrayList<Item>, modifier: Modifier = Modifier) {
                 {
                     AsyncImage(
                         model = it.imgUrl,
-                        contentDescription = it.name
+                        contentDescription = it.name,
+                        modifier = Modifier.aspectRatio(16f / 9f)
                     )
                     Text(
                         text = it.name,
-                        fontSize = 30.sp,
+                        fontSize = 25.sp,
                         fontWeight = FontWeight.Bold,
                         textAlign = TextAlign.Left,
                         modifier = modifier

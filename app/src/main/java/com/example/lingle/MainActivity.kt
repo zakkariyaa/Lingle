@@ -1,4 +1,4 @@
-    package com.example.lingle
+package com.example.lingle
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -18,7 +18,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.lingle.composables.Navbar
-import com.example.lingle.screens.FinalScreenLayout
 import com.example.lingle.screens.HomePage
 import com.example.lingle.screens.ItemScreen
 import com.example.lingle.ui.theme.DarkGreen
@@ -87,23 +86,6 @@ class MainActivity : ComponentActivity() {
                                     navController = navController,
                                     modifier = Modifier)
                             }
-                            composable("complete") {
-                                val startColour: Color = LightTurquoise
-                                val endColour: Color = DarkTurquoise
-                                val items = arrayListOf(
-                                    Item("Apple", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/1_kjyk3h.png"),
-                                    Item("Pear", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/5_qbaizz.png"),
-                                    Item("Orange", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/2_ymvg5d.png"),
-                                    Item("Strawberry", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/3_kiv5du.png"),
-                                    Item("Banana", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/4_w6aicq.png")
-                                )
-                                FinalScreenLayout(
-                                    items,
-                                    startColour,
-                                    endColour,
-                                    navController = navController,
-                                    modifier = Modifier)
-                            }
                         }
                     }
                 }
@@ -150,14 +132,6 @@ fun GreetingPreview() {
                     modifier = Modifier,
                     ) {
                     composable("home") { HomePage(navController = navController, modifier = Modifier) }
-                    composable("complete") {
-                        FinalScreenLayout(
-                            itemList = items,
-                            navController = navController,
-                            startColour = LightOrange,
-                            endColour = DarkOrange,
-                            modifier = Modifier)
-                    }
                 }
             }
         }
