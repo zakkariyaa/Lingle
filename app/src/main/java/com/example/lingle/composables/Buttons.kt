@@ -44,11 +44,8 @@ fun NewGameButton(modifier: Modifier = Modifier) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NextButton(onButtonClick: () -> Unit, modifier: Modifier = Modifier, isFlipped: Boolean) {
-
     Card(
-        onClick = {
-            onButtonClick()
-        },
+        onClick = onButtonClick,
         colors = CardDefaults.cardColors(
             containerColor = Color.Transparent,
         ),

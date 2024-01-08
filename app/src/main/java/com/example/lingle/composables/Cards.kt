@@ -1,7 +1,7 @@
-@file:Suppress("UNUSED_EXPRESSION")
-
 package com.example.lingle.composables
 
+import android.speech.tts.TextToSpeech
+import android.widget.Toast
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -22,6 +22,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -31,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -41,99 +43,118 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.lingle.R
 import com.example.lingle.utils.Item
+import java.util.Locale
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-    fun ItemCard(name: String, image: String, modifier: Modifier = Modifier, onCardClick: () -> Unit, isFlipped: Boolean) {
-        val density = LocalDensity.current.density
+fun ItemCard(name: String, image: String, modifier: Modifier = Modifier, onCardClick: () -> Unit, isFlipped: Boolean) {
+    val density = LocalDensity.current.density
 
-        val rotationY by animateFloatAsState(
-            targetValue = if (isFlipped) 180f else 0f,
-            animationSpec = tween(
-                durationMillis = 400,
-                easing = FastOutSlowInEasing
-            ), label = "Card Flip Animation"
-        )
-        OutlinedCard(
-            onClick = {
-                onCardClick()
+    val rotationY by animateFloatAsState(
+        targetValue = if (isFlipped) 180f else 0f,
+        animationSpec = tween(
+            durationMillis = 400,
+            easing = FastOutSlowInEasing
+        ), label = "Card Flip Animation"
+    )
 
-            },
-            colors = CardDefaults.cardColors(
-                containerColor = Color.White,
-            ),
-            elevation = CardDefaults.cardElevation(
-                defaultElevation = 6.dp
-            ),
-            border = BorderStroke(4.dp, Color.Black),
-            modifier = modifier
-                .fillMaxWidth()
-                .height(500.dp)
-                .size(width = 240.dp, height = 100.dp)
-                .graphicsLayer(
-                    rotationY = rotationY,
-                    cameraDistance = 8 * density
-                )
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                if (isFlipped) {
-                    Text(
-                        text = name,
-                        fontSize = 40.sp,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier
-                            .padding(10.dp)
-                            .graphicsLayer(
-                                rotationY = 180f
-                            )
-                    )
-                    AsyncImage(
-                      model = image,
-                      contentDescription = name,
-                      modifier = Modifier
-                          .size(300.dp).padding(20.dp)
-                          .graphicsLayer(
-                                rotationY = 180f
-                            )
-                )
-                    val soundImage = painterResource(R.drawable.voice)
-                    Image(
-                        painter = soundImage,
-                        contentDescription = "Volume",
-                        modifier = Modifier
-                            .size(55.dp)
-                            .graphicsLayer(
-                                rotationY = 180f
-                            )
-                    )
-
-                } else {
-                    Text(
-                        text = "Guess what this is?",
-                        fontSize = 25.sp,
-                        textAlign = TextAlign.Center,
-                        color = Color.Black,
-                        modifier = Modifier
-                            .padding(10.dp)
-
-                    )
-                    AsyncImage(
-                      model = image,
-                      contentDescription = name,
-                      modifier = Modifier
-                          .size(300.dp).padding(20.dp)
-
-                )
+    // text to speech
+    val context = LocalContext.current
+    var textToSpeech: TextToSpeech? by remember { mutableStateOf(null) }
+    DisposableEffect(context) {
+        textToSpeech = TextToSpeech(context) { status ->
+            if (status == TextToSpeech.SUCCESS) {
+                val result = textToSpeech?.setLanguage(Locale.ENGLISH)
+                if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                    Toast.makeText(context, "language is not supported", Toast.LENGTH_LONG).show()
                 }
+            } else {
+                Toast.makeText(context, "TextToSpeech initialization failed", Toast.LENGTH_LONG).show()
+            }
+        }
+
+        onDispose {
+            textToSpeech?.stop()
+            textToSpeech?.shutdown()
+        }
+    }
+
+
+    OutlinedCard (
+        onClick = onCardClick,
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White,
+        ),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 6.dp
+        ),
+        border = BorderStroke(4.dp, Color.Black),
+        modifier = modifier
+            .fillMaxWidth()
+            .height(500.dp)
+            .size(width = 240.dp, height = 100.dp)
+            .graphicsLayer(
+                rotationY = rotationY,
+                cameraDistance = 8 * density
+            )
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            if (isFlipped) {
+                Text(
+                    text = name,
+                    fontSize = 40.sp,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .padding(10.dp)
+                        .graphicsLayer(
+                            rotationY = 180f
+                        )
+                )
+                AsyncImage(
+                  model = image,
+                  contentDescription = name,
+                  modifier = Modifier
+                      .size(300.dp).padding(20.dp)
+                      .graphicsLayer(
+                            rotationY = 180f
+                        )
+            )
+                Image(
+                    painter = painterResource(R.drawable.voice),
+                    contentDescription = "Volume",
+                    modifier = Modifier
+                        .size(55.dp)
+                        .graphicsLayer(
+                            rotationY = 180f
+                        )
+                )
+
+            } else {
+                Text(
+                    text = "Guess what this is?",
+                    fontSize = 25.sp,
+                    textAlign = TextAlign.Center,
+                    color = Color.Black,
+                    modifier = Modifier
+                        .padding(10.dp)
+
+                )
+                AsyncImage(
+                  model = image,
+                  contentDescription = name,
+                  modifier = Modifier
+                      .size(300.dp).padding(20.dp)
+                )
             }
         }
     }
+}
 
 // Card to list all items viewed in current game, on final screen
 @Composable
