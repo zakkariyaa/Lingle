@@ -42,98 +42,98 @@ import coil.compose.AsyncImage
 import com.example.lingle.R
 import com.example.lingle.utils.Item
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ItemCard(name: String, image: String, modifier: Modifier = Modifier, onCardClick: () -> Unit) {
-    var isFlipped by remember { mutableStateOf(false) }
-    val density = LocalDensity.current.density
-  
-    val rotationY by animateFloatAsState(
-        targetValue = if (isFlipped) 180f else 0f,
-        animationSpec = tween(
-            durationMillis = 400,
-            easing = FastOutSlowInEasing
-        ), label = "Card Flip Animation"
-    )
-    OutlinedCard(
-        onClick = {
-            isFlipped = !isFlipped
-            onCardClick()
-        },
-        colors = CardDefaults.cardColors(
-            containerColor = Color.White,
-        ),
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 6.dp
-        ),
-        border = BorderStroke(4.dp, Color.Black),
-        modifier = modifier
-            .fillMaxWidth()
-            .height(500.dp)
-            .size(width = 240.dp, height = 100.dp)
-            .graphicsLayer(
-                rotationY = rotationY,
-                cameraDistance = 8 * density
-            )
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+    fun ItemCard(name: String, image: String, modifier: Modifier = Modifier, onCardClick: () -> Unit, isFlipped: Boolean) {
+        val density = LocalDensity.current.density
+
+        val rotationY by animateFloatAsState(
+            targetValue = if (isFlipped) 180f else 0f,
+            animationSpec = tween(
+                durationMillis = 400,
+                easing = FastOutSlowInEasing
+            ), label = "Card Flip Animation"
+        )
+        OutlinedCard(
+            onClick = {
+                onCardClick()
+
+            },
+            colors = CardDefaults.cardColors(
+                containerColor = Color.White,
+            ),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 6.dp
+            ),
+            border = BorderStroke(4.dp, Color.Black),
+            modifier = modifier
+                .fillMaxWidth()
+                .height(500.dp)
+                .size(width = 240.dp, height = 100.dp)
+                .graphicsLayer(
+                    rotationY = rotationY,
+                    cameraDistance = 8 * density
+                )
         ) {
-            if (isFlipped) {
-                Text(
-                    text = name,
-                    fontSize = 40.sp,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier
-                        .padding(10.dp)
-                        .graphicsLayer(
-                            rotationY = 180f
-                        )
+            Column(
+                modifier = Modifier
+                    .fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                if (isFlipped) {
+                    Text(
+                        text = name,
+                        fontSize = 40.sp,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .padding(10.dp)
+                            .graphicsLayer(
+                                rotationY = 180f
+                            )
+                    )
+                    AsyncImage(
+                      model = image,
+                      contentDescription = name,
+                      modifier = Modifier
+                          .size(300.dp).padding(20.dp)
+                          .graphicsLayer(
+                                rotationY = 180f
+                            )
                 )
-                AsyncImage(
-                  model = image,
-                  contentDescription = name,
-                  modifier = Modifier
-                      .size(300.dp).padding(20.dp)
-                      .graphicsLayer(
-                            rotationY = 180f
-                        )
-            )
-                val soundImage = painterResource(R.drawable.voice)
-                Image(
-                    painter = soundImage,
-                    contentDescription = "Volume",
-                    modifier = Modifier
-                        .size(55.dp)
-                        .graphicsLayer(
-                            rotationY = 180f
-                        )
-                )
+                    val soundImage = painterResource(R.drawable.voice)
+                    Image(
+                        painter = soundImage,
+                        contentDescription = "Volume",
+                        modifier = Modifier
+                            .size(55.dp)
+                            .graphicsLayer(
+                                rotationY = 180f
+                            )
+                    )
 
-            } else {
-                Text(
-                    text = "Guess what this is?",
-                    fontSize = 25.sp,
-                    textAlign = TextAlign.Center,
-                    color = Color.Black,
-                    modifier = Modifier
-                        .padding(10.dp)
+                } else {
+                    Text(
+                        text = "Guess what this is?",
+                        fontSize = 25.sp,
+                        textAlign = TextAlign.Center,
+                        color = Color.Black,
+                        modifier = Modifier
+                            .padding(10.dp)
+
+                    )
+                    AsyncImage(
+                      model = image,
+                      contentDescription = name,
+                      modifier = Modifier
+                          .size(300.dp).padding(20.dp)
 
                 )
-                AsyncImage(
-                  model = image,
-                  contentDescription = name,
-                  modifier = Modifier
-                      .size(300.dp).padding(20.dp)
-
-            )
+                }
             }
         }
     }
-}
 
 // Card to list all items viewed in current game, on final screen
 @Composable

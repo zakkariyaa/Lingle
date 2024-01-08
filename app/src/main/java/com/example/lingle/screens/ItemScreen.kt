@@ -32,7 +32,7 @@ fun ItemScreen(
     navController: NavHostController,
     modifier: Modifier = Modifier) {
 
-    var onCardFlipped by remember { mutableStateOf(false) }
+    var isFlipped by remember { mutableStateOf(false) }
     var currentItemIndex by remember { mutableIntStateOf(0) }
 
 
@@ -50,8 +50,9 @@ fun ItemScreen(
             )
             .padding(20.dp)
     ) {
-        Spacer(modifier = modifier
-            .weight(0.5f)
+        Spacer(
+            modifier = modifier
+                .weight(0.5f)
         )
         if (category != null) {
             SubHeadingText(
@@ -60,29 +61,36 @@ fun ItemScreen(
                     .weight(1f)
             )
         }
-        Spacer(modifier = modifier
-            .height(10.dp)
+        Spacer(
+            modifier = modifier
+                .height(10.dp)
         )
         randomItems?.let {
             if (it.isNotEmpty()) {
                 ItemCard(
                     name = it[currentItemIndex].name,
                     image = it[currentItemIndex].imgUrl,
+                    isFlipped = isFlipped,
                     onCardClick = {
-                        onCardFlipped = !onCardFlipped
+                        isFlipped = !isFlipped
                     }
                 )
                 Spacer(
                     modifier = modifier
                         .height(25.dp)
                 )
-                if (onCardFlipped) {
+                if (isFlipped) {
                     NextButton(
+                        isFlipped = isFlipped,
                         onButtonClick = {
-                        currentItemIndex = (currentItemIndex + 1) % it.size
-                        onCardFlipped = !onCardFlipped
-                    }
+                            if (currentItemIndex < (randomItems.size ?: 0) - 1) {
+                                currentItemIndex++
+                                isFlipped = false
+                            }
+                        }
                     )
+                } else {
+                    // Final Screen
                 }
             }
         }
@@ -90,6 +98,7 @@ fun ItemScreen(
     }
 
 }
+
 
 //@Preview(
 //    showBackground = true,
