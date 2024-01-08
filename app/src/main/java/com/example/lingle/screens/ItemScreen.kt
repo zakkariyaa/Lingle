@@ -125,8 +125,6 @@ fun ItemScreen(
                     Spacer(modifier = modifier
                         .weight(0.5f)
                     )
-                } else {
-                    // Final Screen
                 }
             }
 
