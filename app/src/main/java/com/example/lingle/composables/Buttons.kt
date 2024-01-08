@@ -43,8 +43,7 @@ fun NewGameButton(modifier: Modifier = Modifier) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NextButton(onButtonClick: () -> Unit, modifier: Modifier = Modifier) {
-
+fun NextButton(onButtonClick: () -> Unit, modifier: Modifier = Modifier, isFlipped: Boolean) {
 
     Card(
         onClick = {
@@ -69,10 +68,6 @@ fun NextButton(onButtonClick: () -> Unit, modifier: Modifier = Modifier) {
             )
         }
     }
-}
-
-fun onButtonClick() {
-
 }
 
 
