@@ -90,9 +90,10 @@ fun ItemCard(name: String, image: String, modifier: Modifier = Modifier, onCardC
             containerColor = Color.White,
         ),
         elevation = CardDefaults.cardElevation(
-            defaultElevation = 6.dp
+            defaultElevation = 16.dp
         ),
         border = BorderStroke(4.dp, Color.Black),
+        shape = RoundedCornerShape(20.dp),
         modifier = modifier
             .fillMaxWidth()
             .height(500.dp)
@@ -179,7 +180,7 @@ fun FinalCard(itemList: ArrayList<Item>, modifier: Modifier = Modifier) {
 
     Card(
         colors = CardDefaults.cardColors(Color.White),
-        border = BorderStroke(3.dp, Color.Black),
+        border = BorderStroke(4.dp, Color.Black),
         shape = RoundedCornerShape(20.dp),
         elevation = CardDefaults.cardElevation(16.dp),
         modifier = modifier
@@ -190,7 +191,7 @@ fun FinalCard(itemList: ArrayList<Item>, modifier: Modifier = Modifier) {
         Column(verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.Start,
             modifier = modifier
-                    .padding(horizontal = 50.dp, vertical = 15.dp)
+                    .padding(horizontal = 40.dp, vertical = 15.dp)
         )
         {
             // Display image and name for each item viewed in the game
