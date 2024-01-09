@@ -39,6 +39,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -53,13 +54,12 @@ import java.util.Locale
 @Composable
 fun ItemCard(name: String, image: String, modifier: Modifier = Modifier, onCardClick: () -> Unit, isFlipped: Boolean) {
     val density = LocalDensity.current.density
-
     val rotationY by animateFloatAsState(
         targetValue = if (isFlipped) 180f else 0f,
         animationSpec = tween(
             durationMillis = 400,
             easing = FastOutSlowInEasing
-        ), label = "Card Flip Animation"
+        ), label = stringResource(id = R.string.flip_animation_label)
     )
 
     // text to speech
@@ -143,7 +143,7 @@ fun ItemCard(name: String, image: String, modifier: Modifier = Modifier, onCardC
                 ) {
                     Image(
                         painter = painterResource(R.drawable.voice),
-                        contentDescription = "Volume",
+                        contentDescription = stringResource(id = R.string.volume_icon),
                         modifier = Modifier
                             .size(55.dp)
                             .graphicsLayer(
@@ -154,7 +154,7 @@ fun ItemCard(name: String, image: String, modifier: Modifier = Modifier, onCardC
 
             } else {
                 Text(
-                    text = "Guess what this is?",
+                    text = stringResource(id = R.string.guess),
                     fontSize = 25.sp,
                     textAlign = TextAlign.Center,
                     color = Color.Black,
@@ -177,7 +177,6 @@ fun ItemCard(name: String, image: String, modifier: Modifier = Modifier, onCardC
 // Card to list all items viewed in current game, on final screen
 @Composable
 fun FinalCard(itemList: ArrayList<Item>, modifier: Modifier = Modifier) {
-
     Card(
         colors = CardDefaults.cardColors(Color.White),
         border = BorderStroke(4.dp, Color.Black),
@@ -228,6 +227,7 @@ fun HomePageCard (
     color: Color,
     picture: Int,
     navController: NavHostController,
+    modifier: Modifier,
     ) {
 
     Card(onClick = { navController.navigate("item/${category}") },
@@ -253,9 +253,10 @@ fun HomePageCard (
                     .weight(1f)
             )
             Image(
-                painter = painterResource(id = picture),
-                contentDescription = "category image",
+                painter = painterResource(picture),
+                contentDescription = category,
                 modifier = Modifier
+                    .padding(bottom = 20.dp)
                     .fillMaxWidth()
                     .height(130.dp)
             )
@@ -264,44 +265,44 @@ fun HomePageCard (
 }
 
 
-// @Preview(showBackground = true)
-// @Composable
-// fun CardPreview() {
-//     FinalCard(
-//         arrayListOf
-//             (
-//         Item("Apple", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/1_kjyk3h.png"),
-//         Item("Pear", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/5_qbaizz.png"),
-//         Item(
-//             "Orange",
-//             "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/2_ymvg5d.png"
-//         ),
-//         Item(
-//             "Strawberry",
-//             "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/3_kiv5du.png"
-//         ),
-//         Item("Banana", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/4_w6aicq.png")
-//         )
+//@Preview(showBackground = true)
+//@Composable
+//fun CardPreview() {
+// FinalCard(
+//     arrayListOf
+//         (
+//     Item("Apple", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/1_kjyk3h.png"),
+//     Item("Pear", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/5_qbaizz.png"),
+//     Item(
+//         "Orange",
+//         "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/2_ymvg5d.png"
+//     ),
+//     Item(
+//         "Strawberry",
+//         "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/3_kiv5du.png"
+//     ),
+//     Item("Banana", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/4_w6aicq.png")
 //     )
-// }
+// )
+//}
 
-//  @Preview(showBackground = true)
-//  @Composable
-//  fun HomePageCardsPreview() {
-//      val navController = rememberNavContro ller()
-//      LingleTheme {
-//          HomePageCards("HELLO ANDROID!", color = Color.Red, picture = painterResource(id = R.drawable.fruits), navController = navController) }
-//  fun CardsPreview() {
-//      LingleTheme {
-//          ItemCard(name = "Apple")
-//      }
+//@Preview(showBackground = true)
+//@Composable
+//fun HomePageCardsPreview() {
+//  val navController = rememberNavContro ller()
+//  LingleTheme {
+//      HomePageCards("HELLO ANDROID!", color = Color.Red, picture = painterResource(id = R.drawable.fruits), navController = navController) }
+//fun CardsPreview() {
+//  LingleTheme {
+//      ItemCard(name = "Apple")
 //  }
+//}
 
 
-// @Preview(showBackground = true)
-// @Composable
-// fun HomePageCardsPreview() {
-//     LingleTheme {
-//         HomePageCards("HELLO ANDROID!", color = Color.Red, picture = painterResource(id = R.drawable.fruits)) }
-// }
+//@Preview(showBackground = true)
+//@Composable
+//fun HomePageCardsPreview() {
+// LingleTheme {
+//     HomePageCards("HELLO ANDROID!", color = Color.Red, picture = painterResource(id = R.drawable.fruits)) }
+//}
 
