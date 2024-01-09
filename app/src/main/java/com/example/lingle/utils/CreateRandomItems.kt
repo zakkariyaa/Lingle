@@ -12,6 +12,7 @@ fun createRandomItems(array: ArrayList<Item>): ArrayList<Item> {
     return randomItems
 }
 
+
 fun randomItems(category: String?): ArrayList<Item>? {
     return categories.find { it.name == category }
         ?.let { createRandomItems(it.items) }
