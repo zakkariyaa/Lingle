@@ -20,10 +20,6 @@ import androidx.navigation.compose.rememberNavController
 import com.example.lingle.composables.Navbar
 import com.example.lingle.screens.HomePage
 import com.example.lingle.screens.ItemScreen
-import com.example.lingle.ui.theme.DarkOrange
-import com.example.lingle.ui.theme.DarkTurquoise
-import com.example.lingle.ui.theme.LightOrange
-import com.example.lingle.ui.theme.LightTurquoise
 import com.example.lingle.ui.theme.LingleTheme
 import com.example.lingle.ui.theme.categoriesColorList
 import com.example.lingle.utils.categories
@@ -77,6 +73,7 @@ class MainActivity : ComponentActivity() {
                                     randomItems,
                                     startColour,
                                     endColour,
+                                    navController,
                                     modifier = Modifier)
                             }
                         }

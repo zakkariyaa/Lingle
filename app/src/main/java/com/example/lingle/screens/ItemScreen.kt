@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -40,7 +39,9 @@ fun ItemScreen(
     randomItems: ArrayList<Item>?,
     startColour: Color,
     endColour: Color,
-    modifier: Modifier = Modifier) {
+    navController: NavHostController,
+    modifier: Modifier = Modifier
+) {
 
     var isFlipped by remember { mutableStateOf(false) }
     var currentItemIndex by remember { mutableIntStateOf(0) }
@@ -164,6 +165,7 @@ fun ItemScreenPreview() {
         randomItems = items,
         startColour = LightOrange,
         endColour = DarkOrange,
+        navController = navController,
         modifier = Modifier
     )
 }
