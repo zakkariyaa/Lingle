@@ -2,14 +2,19 @@
 
 package com.example.lingle.composables
 
+import android.speech.tts.TextToSpeech
+import android.widget.Toast
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -22,6 +27,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -30,6 +36,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -40,13 +48,13 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.lingle.R
 import com.example.lingle.utils.Item
+import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ItemCard(name: String, image: String, modifier: Modifier = Modifier) {
-    var isFlipped by remember { mutableStateOf(false) }
+fun ItemCard(name: String, image: String, modifier: Modifier = Modifier, onCardClick: () -> Unit, isFlipped: Boolean) {
     val density = LocalDensity.current.density
-  
+
     val rotationY by animateFloatAsState(
         targetValue = if (isFlipped) 180f else 0f,
         animationSpec = tween(
@@ -54,11 +62,31 @@ fun ItemCard(name: String, image: String, modifier: Modifier = Modifier) {
             easing = FastOutSlowInEasing
         ), label = "Card Flip Animation"
     )
-  OutlinedCard(
-        onClick = {
-            isFlipped = !isFlipped
-//            onCardFlipped
-        },
+
+    // text to speech
+    val context = LocalContext.current
+    var textToSpeech: TextToSpeech? by remember { mutableStateOf(null) }
+    DisposableEffect(context) {
+        textToSpeech = TextToSpeech(context) { status ->
+            if (status == TextToSpeech.SUCCESS) {
+                val result = textToSpeech?.setLanguage(Locale.ENGLISH)
+                if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                    Toast.makeText(context, "language is not supported", Toast.LENGTH_LONG).show()
+                }
+            } else {
+                Toast.makeText(context, "TextToSpeech initialization failed", Toast.LENGTH_LONG).show()
+            }
+        }
+
+        onDispose {
+            textToSpeech?.stop()
+            textToSpeech?.shutdown()
+        }
+    }
+
+
+    OutlinedCard (
+        onClick = onCardClick,
         colors = CardDefaults.cardColors(
             containerColor = Color.White,
         ),
@@ -96,21 +124,33 @@ fun ItemCard(name: String, image: String, modifier: Modifier = Modifier) {
                   model = image,
                   contentDescription = name,
                   modifier = Modifier
-                      .size(300.dp).padding(20.dp)
+                      .size(200.dp)
+                      .padding(20.dp)
                       .graphicsLayer(
-                            rotationY = 180f
-                        )
-            )
-                val soundImage = painterResource(R.drawable.voice)
-                Image(
-                    painter = soundImage,
-                    contentDescription = "Volume",
-                    modifier = Modifier
-                        .size(55.dp)
-                        .graphicsLayer(
-                            rotationY = 180f
-                        )
+                          rotationY = 180f
+                      )
                 )
+
+                Box(
+                    Modifier.clickable {
+                        textToSpeech?.speak(
+                            name,
+                            TextToSpeech.QUEUE_FLUSH,
+                            null,
+                            null
+                        )
+                    }
+                ) {
+                    Image(
+                        painter = painterResource(R.drawable.voice),
+                        contentDescription = "Volume",
+                        modifier = Modifier
+                            .size(55.dp)
+                            .graphicsLayer(
+                                rotationY = 180f
+                            )
+                    )
+                }
 
             } else {
                 Text(
@@ -126,11 +166,9 @@ fun ItemCard(name: String, image: String, modifier: Modifier = Modifier) {
                   model = image,
                   contentDescription = name,
                   modifier = Modifier
-                      .size(300.dp).padding(20.dp)
-                      .graphicsLayer(
-                            rotationY = 180f
-                        )
-            )
+                      .size(300.dp)
+                      .padding(20.dp)
+                )
             }
         }
     }
@@ -147,6 +185,7 @@ fun FinalCard(itemList: ArrayList<Item>, modifier: Modifier = Modifier) {
         elevation = CardDefaults.cardElevation(16.dp),
         modifier = modifier
             .fillMaxWidth()
+//            .padding(2.dp)
     )
     {
         Column(verticalArrangement = Arrangement.Center,
@@ -165,11 +204,12 @@ fun FinalCard(itemList: ArrayList<Item>, modifier: Modifier = Modifier) {
                 {
                     AsyncImage(
                         model = it.imgUrl,
-                        contentDescription = it.name
+                        contentDescription = it.name,
+                        modifier = Modifier.aspectRatio(16f / 9f)
                     )
                     Text(
                         text = it.name,
-                        fontSize = 30.sp,
+                        fontSize = 25.sp,
                         fontWeight = FontWeight.Bold,
                         textAlign = TextAlign.Left,
                         modifier = modifier
@@ -208,7 +248,9 @@ fun HomePageCard (
                 text = category,
                 modifier = Modifier
                     .padding(bottom = 25.dp)
+                fontSize = 25.sp,
                     .align(Alignment.CenterHorizontally)
+                    .weight(1f)
             )
             Image(
                 painter = painterResource(id = picture),
@@ -220,8 +262,6 @@ fun HomePageCard (
         }
     }
 }
-
-
 
 
 // @Preview(showBackground = true)
@@ -248,12 +288,12 @@ fun HomePageCard (
 //  @Preview(showBackground = true)
 //  @Composable
 //  fun HomePageCardsPreview() {
-//      val navController = rememberNavController()
+//      val navController = rememberNavContro ller()
 //      LingleTheme {
 //          HomePageCards("HELLO ANDROID!", color = Color.Red, picture = painterResource(id = R.drawable.fruits), navController = navController) }
 //  fun CardsPreview() {
 //      LingleTheme {
-//          ItemCard(name = "Apple", onCardFlipped = {false})
+//          ItemCard(name = "Apple")
 //      }
 //  }
 

@@ -1,20 +1,26 @@
 package com.example.lingle.composables
 
+import android.speech.tts.TextToSpeech
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -40,9 +46,11 @@ fun NewGameButton(modifier: Modifier = Modifier) {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NextButton(modifier: Modifier = Modifier) {
+fun NextButton(onButtonClick: () -> Unit, modifier: Modifier = Modifier, isFlipped: Boolean) {
     Card(
+        onClick = onButtonClick,
         colors = CardDefaults.cardColors(
             containerColor = Color.Transparent,
         ),
@@ -64,10 +72,9 @@ fun NextButton(modifier: Modifier = Modifier) {
     }
 }
 
-
 @Preview
 @Composable
 fun ButtonPreview() {
 //    NewGameButton()
-    NextButton()
+//    NextButton()
 }

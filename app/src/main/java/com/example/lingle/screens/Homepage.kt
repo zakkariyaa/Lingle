@@ -52,7 +52,6 @@ fun HomePage(categories: List<Category>?, navController: NavHostController, modi
                 text = stringResource(id = R.string.choose_category)
             )
         }
-
         if (categories != null) {
             LazyVerticalGrid(
                 columns = GridCells.Adaptive(minSize = 158.dp),
