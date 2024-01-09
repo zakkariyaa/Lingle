@@ -64,8 +64,7 @@ fun ItemScreen(
         randomItems?.get(0)?.let {
             ItemCard(
                 name = it.name,
-                image = it.imgUrl,
-                onCardFlipped = { false }
+                image = it.imgUrl
             )
             run {
                 if (onCardFlipped) {

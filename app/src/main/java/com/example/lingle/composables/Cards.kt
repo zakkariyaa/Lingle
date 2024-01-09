@@ -1,4 +1,4 @@
-@file:Suppress("UNUSED_EXPRESSION")
+@file:OptIn(ExperimentalMaterial3Api::class)
 
 package com.example.lingle.composables
 
@@ -30,7 +30,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -44,7 +43,7 @@ import com.example.lingle.utils.Item
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ItemCard(name: String, image: String, modifier: Modifier = Modifier, onCardFlipped: () -> Boolean) {
+fun ItemCard(name: String, image: String, modifier: Modifier = Modifier) {
     var isFlipped by remember { mutableStateOf(false) }
     val density = LocalDensity.current.density
   
@@ -183,40 +182,40 @@ fun FinalCard(itemList: ArrayList<Item>, modifier: Modifier = Modifier) {
 }
 
 // Card to show category, on homepage screen
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomePageCards (
+fun HomePageCard (
     category: String,
     color: Color,
-    picture: Painter,
+    picture: Int,
     navController: NavHostController,
-    modifier: Modifier = Modifier) {
+    ) {
 
     Card(onClick = { navController.navigate("item/${category}") },
         colors = CardDefaults.cardColors(color),
         border = BorderStroke(3.dp, Color.White),
         elevation = CardDefaults.cardElevation(16.dp),
-        modifier = modifier
+        modifier = Modifier
             .fillMaxSize()
-            .padding(10.dp)
+            .padding(15.dp)
 
     ){
         Column (
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .padding(20.dp)
         ){
             Text(
                 text = category,
-                modifier = modifier
-                    .padding(top = 30.dp)
+                modifier = Modifier
+                    .padding(bottom = 25.dp)
                     .align(Alignment.CenterHorizontally)
             )
             Image(
-                painter = picture,
-                contentDescription = "quiz logo",
-                modifier = modifier
-                    .padding(bottom = 20.dp)
+                painter = painterResource(id = picture),
+                contentDescription = "category image",
+                modifier = Modifier
                     .fillMaxWidth()
-                    .weight(1f)
+                    .height(130.dp)
             )
         }
     }
