@@ -40,6 +40,7 @@ fun ItemScreen(
     randomItems: ArrayList<Item>?,
     startColour: Color,
     endColour: Color,
+    navController: NavHostController,
     modifier: Modifier = Modifier) {
 
     var isFlipped by remember { mutableStateOf(false) }
@@ -164,6 +165,7 @@ fun ItemScreenPreview() {
         randomItems = items,
         startColour = LightOrange,
         endColour = DarkOrange,
+        navController = navController,
         modifier = Modifier
     )
 }
