@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.example.lingle.composables
 
 import android.speech.tts.TextToSpeech
@@ -220,42 +222,42 @@ fun FinalCard(itemList: ArrayList<Item>, modifier: Modifier = Modifier) {
 }
 
 // Card to show category, on homepage screen
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomePageCards (
+fun HomePageCard (
     category: String,
     color: Color,
-    picture: Painter,
+    picture: Int,
     navController: NavHostController,
-    modifier: Modifier = Modifier) {
+    ) {
 
     Card(onClick = { navController.navigate("item/${category}") },
         colors = CardDefaults.cardColors(color),
         border = BorderStroke(3.dp, Color.White),
         elevation = CardDefaults.cardElevation(16.dp),
-        modifier = modifier
+        modifier = Modifier
             .fillMaxSize()
-            .padding(10.dp)
+            .padding(15.dp)
 
     ){
         Column (
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .padding(20.dp)
         ){
             Text(
                 text = category,
+                modifier = Modifier
+                    .padding(bottom = 25.dp)
                 fontSize = 25.sp,
-                modifier = modifier
-                    .padding(top = 30.dp)
                     .align(Alignment.CenterHorizontally)
                     .weight(1f)
             )
             Image(
-                painter = picture,
-                contentDescription = "quiz logo",
-                modifier = modifier
-                    .padding(bottom = 20.dp)
+                painter = painterResource(id = picture),
+                contentDescription = "category image",
+                modifier = Modifier
                     .fillMaxWidth()
-                    .weight(3f)
+                    .height(130.dp)
             )
         }
     }

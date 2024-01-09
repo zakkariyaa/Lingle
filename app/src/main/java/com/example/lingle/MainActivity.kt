@@ -20,17 +20,13 @@ import androidx.navigation.compose.rememberNavController
 import com.example.lingle.composables.Navbar
 import com.example.lingle.screens.HomePage
 import com.example.lingle.screens.ItemScreen
-import com.example.lingle.ui.theme.DarkGreen
 import com.example.lingle.ui.theme.DarkOrange
-import com.example.lingle.ui.theme.DarkPurple
-import com.example.lingle.ui.theme.DarkRed
 import com.example.lingle.ui.theme.DarkTurquoise
-import com.example.lingle.ui.theme.LightGreen
 import com.example.lingle.ui.theme.LightOrange
-import com.example.lingle.ui.theme.LightPurple
-import com.example.lingle.ui.theme.LightRed
 import com.example.lingle.ui.theme.LightTurquoise
 import com.example.lingle.ui.theme.LingleTheme
+import com.example.lingle.ui.theme.categoriesColorList
+import com.example.lingle.utils.categories
 import com.example.lingle.utils.Item
 import com.example.lingle.utils.randomItems
 
@@ -66,20 +62,16 @@ class MainActivity : ComponentActivity() {
                         NavHost(
                             navController = navController,
                             startDestination = "home",
-                            ) {
-                            composable("home") { HomePage(navController = navController, modifier = Modifier) }
+                        ) {
+                            composable("home") { HomePage(categories = categories, navController = navController, modifier = Modifier) }
                             composable("item/{category}") {
                                 backStackEntry ->
-                                val category = rememberSaveable { backStackEntry.arguments?.getString("category") ?: ""}
-                                val randomItems = rememberSaveable { randomItems(category) ?: arrayListOf() }
-                                var startColour: Color = LightTurquoise
-                                var endColour: Color = DarkTurquoise
-                                when (category) {
-                                    "Fruits" -> { startColour = LightOrange; endColour = DarkOrange }
-                                    "Vegetables" -> { startColour = LightGreen; endColour = DarkGreen }
-                                    "Colours" -> { startColour = LightPurple; endColour = DarkPurple }
-                                    "Animals" -> { startColour = LightRed; endColour = DarkRed }
-                                }
+                                val category: String = rememberSaveable { backStackEntry.arguments?.getString("category") ?: ""}
+                                val randomItems: ArrayList<Item> = rememberSaveable { randomItems(category) ?: arrayListOf() }
+                                val categoryIndex: Int = categories.indexOfFirst { it.name == category }
+                                val startColour: Color = categoriesColorList[categoryIndex % categoriesColorList.size].first
+                                val endColour: Color = categoriesColorList[categoryIndex % categoriesColorList.size].second
+
                                 ItemScreen(
                                     category,
                                     randomItems,
@@ -135,7 +127,7 @@ fun GreetingPreview() {
                     startDestination = "home",
                     modifier = Modifier,
                     ) {
-                    composable("home") { HomePage(navController = navController, modifier = Modifier) }
+                    composable("home") { HomePage(categories = categories, navController = navController, modifier = Modifier) }
                 }
             }
         }
