@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.example.lingle.composables
 
 import android.speech.tts.TextToSpeech
@@ -34,7 +36,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
@@ -218,42 +219,44 @@ fun FinalCard(itemList: ArrayList<Item>, modifier: Modifier = Modifier) {
 }
 
 // Card to show category, on homepage screen
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomePageCards (
+fun HomePageCard (
     category: String,
     color: Color,
-    picture: Painter,
+    picture: Int,
     navController: NavHostController,
-    modifier: Modifier = Modifier) {
+    modifier: Modifier,
+    ) {
 
     Card(onClick = { navController.navigate("item/${category}") },
         colors = CardDefaults.cardColors(color),
         border = BorderStroke(3.dp, Color.White),
         elevation = CardDefaults.cardElevation(16.dp),
-        modifier = modifier
+        modifier = Modifier
             .fillMaxSize()
-            .padding(10.dp)
+            .padding(15.dp)
 
     ){
         Column (
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .padding(20.dp)
         ){
             Text(
                 text = category,
                 fontSize = 25.sp,
-                modifier = modifier
-                    .padding(top = 30.dp)
+                modifier = Modifier
+                    .padding(bottom = 25.dp)
                     .align(Alignment.CenterHorizontally)
                     .weight(1f)
             )
             Image(
-                painter = picture,
+                painter = painterResource(picture),
                 contentDescription = category,
-                modifier = modifier
+                modifier = Modifier
                     .padding(bottom = 20.dp)
                     .fillMaxWidth()
-                    .weight(3f)
+                    .height(130.dp)
             )
         }
     }

@@ -24,3 +24,10 @@ val DarkGreen =Color(0xFF00D572)
 // Animals Category
 val LightRed =Color(0xFFFFB2B2)
 val DarkRed =Color(0xFFFF5959)
+
+val categoriesColorList = listOf(
+    LightOrange to DarkOrange,
+    LightPurple to DarkPurple,
+    LightGreen to DarkGreen,
+    LightRed to DarkRed
+)

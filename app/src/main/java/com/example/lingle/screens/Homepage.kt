@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,14 +22,17 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.lingle.R
-import com.example.lingle.composables.HomePageCards
+import com.example.lingle.composables.HomePageCard
 import com.example.lingle.composables.SubHeadingText
 import com.example.lingle.ui.theme.DarkTurquoise
 import com.example.lingle.ui.theme.LightTurquoise
 import com.example.lingle.ui.theme.LingleTheme
+import com.example.lingle.ui.theme.categoriesColorList
+import com.example.lingle.utils.Category
+import com.example.lingle.utils.categories
 
 @Composable
-fun HomePage(navController: NavHostController, modifier: Modifier) {
+fun HomePage(categories: List<Category>?, navController: NavHostController, modifier: Modifier) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -40,57 +45,30 @@ fun HomePage(navController: NavHostController, modifier: Modifier) {
                 )
             )
             .padding(top = 80.dp)
-    ){
-        Box(modifier = modifier
-            .align(Alignment.CenterHorizontally)
-        ){
+    ) {
+        Box(
+            modifier = modifier
+                .align(Alignment.CenterHorizontally)
+        ) {
             SubHeadingText(
                 text = stringResource(id = R.string.choose_category)
             )
         }
-        Row (modifier = modifier
-            .weight(1f)
-            .padding(10.dp)
-        )
-        {
-            HomePageCards(
-                navController = navController,
-                category = stringResource(id = R.string.category_title_fruits),
-                color = Color(0xFFFFC824),
-                picture = painterResource(id = R.drawable.fruits),
-                modifier = modifier
-                    .weight(0.5f)
-            )
-
-            HomePageCards(
-                navController = navController,
-                category = stringResource(id = R.string.category_title_colours),
-                color = Color(0xFFC08EC9),
-                picture = painterResource(id = R.drawable.colours),
-                modifier = modifier
-                    .weight(0.5f)
-            )
-        }
-        Row (modifier = modifier
-            .weight(1f)
-            .padding(10.dp)
-        ){
-            HomePageCards(
-                navController = navController,
-                category = stringResource(id = R.string.category_title_vegetables),
-                color = Color(0xFF00D572),
-                picture = painterResource(id = R.drawable.vegetables),
-                modifier = modifier
-                    .weight(0.5f)
-            )
-
-            HomePageCards(
-                navController = navController,
-                category = stringResource(id = R.string.category_title_animals),
-                color = Color(0xFFFF5959),
-                picture = painterResource(id = R.drawable.animals),
-                modifier = modifier
-                    .weight(0.5f)
+        if (categories != null) {
+            LazyVerticalGrid(
+                columns = GridCells.Adaptive(minSize = 158.dp),
+                content = {
+                items(categories.size) {index ->
+                    HomePageCard (
+                        category = categories[index].name,
+                        color = categoriesColorList[index % categoriesColorList.size].second,
+                        picture = categories[index].picture,
+                        navController = navController,
+                        modifier = modifier
+                            .weight(0.5f)
+                    )
+                }
+            }
             )
         }
 
@@ -100,13 +78,12 @@ fun HomePage(navController: NavHostController, modifier: Modifier) {
 }
 
 
-
 @Preview(showBackground = true)
 
 @Composable
 fun GreetingPreview() {
     val navController = rememberNavController()
     LingleTheme {
-        HomePage(navController = navController, modifier = Modifier)
+        HomePage(categories = categories, navController = navController, modifier = Modifier)
     }
 }

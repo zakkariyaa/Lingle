@@ -1,8 +1,11 @@
 package com.example.lingle.utils
 
+import com.example.lingle.R
+
 val categories = listOf(
     Category(
         name = "Fruits",
+        picture = R.drawable.fruits,
         items = arrayListOf(
             Item("Apple", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/1_kjyk3h.png"),
             Item("Pear", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/5_qbaizz.png"),
@@ -14,10 +17,11 @@ val categories = listOf(
             Item("Pineapple", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393950/8_yhzzms.png"),
             Item("Kiwi", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393951/9_jjzifm.png"),
             Item("Cherries", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393951/10_hwcywt.png")
-        )
+        ),
     ),
     Category(
         name = "Vegetables",
+        picture = R.drawable.vegetables,
         items = arrayListOf(
             Item("Sweetcorn", "https://www-leshop-ch-cld-res.cloudinary.com/image/upload/w_1000,h_1000,d_mo-default-product-detail.png,c_pad,g_center,fl_lossy,b_rgb:fff/f_auto/e_unsharp_mask:99/q_auto/v1458121117/prod/catalog/product/product-66226"),
             Item("Carrot", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702395495/carrot_fqdbll.png"),
@@ -33,6 +37,7 @@ val categories = listOf(
     ),
     Category(
         name = "Animals",
+        picture = R.drawable.animals,
         items = arrayListOf(
             Item("Dog", "https://i.pinimg.com/originals/64/54/45/645445b5e8d68fc2701da573fc692357.png"),
             Item("Cat", "https://i.pinimg.com/736x/3b/90/18/3b901845141de8da9ba17f2c94eb3e1e.jpg"),
@@ -49,6 +54,7 @@ val categories = listOf(
 
     Category(
         name = "Colours",
+        picture = R.drawable.colours,
         items = arrayListOf(
             Item("Red", "https://www.solidbackgrounds.com/images/3840x2160/3840x2160-red-solid-color-background.jpg"),
             Item("Blue", "https://htmlcolorcodes.com/assets/images/colors/bright-blue-color-solid-background-1920x1080.png"),
@@ -61,5 +67,5 @@ val categories = listOf(
             Item("Black", "https://htmlcolorcodes.com/assets/images/colors/black-color-solid-background-1920x1080.png"),
 //            Item("White", "https://htmlcolorcodes.com/assets/images/colors/white-color-solid-background-1920x1080.png")
         )
-    ),
+    )
 )
