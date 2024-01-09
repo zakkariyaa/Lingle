@@ -3,9 +3,9 @@
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.absoluteOffset
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -50,15 +50,17 @@ class MainActivity : ComponentActivity() {
 //                         endColour = darkOrange
 //                     )
                 val navController = rememberNavController()
-                val offsetY = (-50).dp
-                Column(modifier = Modifier.fillMaxSize()) {
+//                val offsetY = (-50).dp
+                Column(modifier = Modifier.fillMaxSize(),
+                        verticalArrangement = Arrangement.spacedBy((-50).dp),
+                    ) {
                     Box(modifier = Modifier.zIndex(2f)) {
                         Navbar(navController = navController)
                     }
                     Box(
                         modifier = Modifier
-                            .absoluteOffset(x = 0.dp, y = offsetY)
-                            .weight(1f)
+//                            .absoluteOffset(x = 0.dp, y = offsetY)
+//                            .weight(1f)
                             .zIndex(1f)
                     ) {
                         NavHost(
@@ -105,7 +107,7 @@ fun GreetingPreview() {
 //             endColour = darkOrange
 //         )
         val navController = rememberNavController()
-        val offsetY = (-50).dp
+//        val offsetY = (-50).dp
 
         val items = arrayListOf(
             Item("Apple", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/1_kjyk3h.png"),
@@ -115,13 +117,15 @@ fun GreetingPreview() {
             Item("Banana", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/4_w6aicq.png")
         )
 
-        Column(modifier = Modifier) {
-            Box(modifier = Modifier.zIndex(2f)) {
+        Column(modifier = Modifier,
+            verticalArrangement = Arrangement.spacedBy((-50).dp),
+        ) {
+            Box(modifier = Modifier.zIndex(2f),) {
                 Navbar(navController = navController)
             }
             Box(
                 modifier = Modifier
-                    .absoluteOffset(x = 0.dp, y = offsetY)
+//                    .absoluteOffset(x = 0.dp, y = offsetY)
                     .weight(1f)
                     .zIndex(1f)
                     .fillMaxSize()
