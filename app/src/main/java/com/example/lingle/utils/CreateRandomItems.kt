@@ -2,10 +2,12 @@ package com.example.lingle.utils
 
 fun createRandomItems(array: ArrayList<Item>): ArrayList<Item> {
     val randomItems = arrayListOf<Item>()
-    for (i in 1..5) {
+    while (randomItems.size < 5) {
         val random = java.util.Random()
         val randomItem = array[random.nextInt(array.size)]
-        randomItems.add(randomItem)
+        if (!randomItems.contains(randomItem)){
+            randomItems.add(randomItem)
+        }
     }
     return randomItems
 }
