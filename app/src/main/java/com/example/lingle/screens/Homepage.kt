@@ -26,7 +26,6 @@ import com.example.lingle.ui.theme.DarkTurquoise
 import com.example.lingle.ui.theme.LightTurquoise
 import com.example.lingle.ui.theme.LingleTheme
 
-
 @Composable
 fun HomePage(navController: NavHostController, modifier: Modifier) {
     Column(
@@ -56,7 +55,7 @@ fun HomePage(navController: NavHostController, modifier: Modifier) {
         {
             HomePageCards(
                 navController = navController,
-                category = "Fruits",
+                category = stringResource(id = R.string.category_title_fruits),
                 color = Color(0xFFFFC824),
                 picture = painterResource(id = R.drawable.fruits),
                 modifier = modifier
@@ -65,7 +64,7 @@ fun HomePage(navController: NavHostController, modifier: Modifier) {
 
             HomePageCards(
                 navController = navController,
-                category = "Colours",
+                category = stringResource(id = R.string.category_title_colours),
                 color = Color(0xFFC08EC9),
                 picture = painterResource(id = R.drawable.colours),
                 modifier = modifier
@@ -78,7 +77,7 @@ fun HomePage(navController: NavHostController, modifier: Modifier) {
         ){
             HomePageCards(
                 navController = navController,
-                category = "Vegetables",
+                category = stringResource(id = R.string.category_title_vegetables),
                 color = Color(0xFF00D572),
                 picture = painterResource(id = R.drawable.vegetables),
                 modifier = modifier
@@ -87,7 +86,7 @@ fun HomePage(navController: NavHostController, modifier: Modifier) {
 
             HomePageCards(
                 navController = navController,
-                category = "Animals",
+                category = stringResource(id = R.string.category_title_animals),
                 color = Color(0xFFFF5959),
                 picture = painterResource(id = R.drawable.animals),
                 modifier = modifier
@@ -97,8 +96,6 @@ fun HomePage(navController: NavHostController, modifier: Modifier) {
 
         Spacer(modifier = modifier
             .height(50.dp))
-
-
     }
 }
 

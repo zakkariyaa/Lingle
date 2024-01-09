@@ -85,7 +85,6 @@ class MainActivity : ComponentActivity() {
                                     randomItems,
                                     startColour,
                                     endColour,
-                                    navController = navController,
                                     modifier = Modifier)
                             }
                         }

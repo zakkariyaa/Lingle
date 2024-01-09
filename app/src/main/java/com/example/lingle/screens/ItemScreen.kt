@@ -39,7 +39,6 @@ fun ItemScreen(
     randomItems: ArrayList<Item>?,
     startColour: Color,
     endColour: Color,
-    navController: NavHostController,
     modifier: Modifier = Modifier) {
 
     var isFlipped by remember { mutableStateOf(false) }
@@ -101,7 +100,7 @@ fun ItemScreen(
                         )
                     } else {
                         Text(
-                            text = "Tap the card to find out!",
+                            text = stringResource(id = R.string.tap_card),
                             color = Color.Black,
                             fontWeight = FontWeight.Bold,
                             fontSize = 20.sp,
@@ -151,7 +150,7 @@ fun ItemScreen(
 )
 @Composable
 fun ItemScreenPreview() {
-    val navController = rememberNavController()
+    val navController = rememberNavController() 
     val items = arrayListOf(
         Item("Apple", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/1_kjyk3h.png"),
         Item("Pear", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/5_qbaizz.png"),
@@ -159,12 +158,11 @@ fun ItemScreenPreview() {
         Item("Strawberry", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/3_kiv5du.png"),
         Item("Banana", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/4_w6aicq.png"),
     )
-        ItemScreen(
-            category = "Fruits",
-            randomItems = items,
-            startColour = LightOrange,
-            endColour = DarkOrange,
-            navController = navController,
-            modifier = Modifier
-        )
+    ItemScreen(
+        category = "Fruits",
+        randomItems = items,
+        startColour = LightOrange,
+        endColour = DarkOrange,
+        modifier = Modifier
+    )
 }
