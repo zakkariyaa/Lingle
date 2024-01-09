@@ -36,7 +36,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
@@ -248,9 +247,9 @@ fun HomePageCard (
                 text = category,
                 modifier = Modifier
                     .padding(bottom = 25.dp)
+                    .align(Alignment.CenterHorizontally),
                 fontSize = 25.sp,
-                    .align(Alignment.CenterHorizontally)
-                    .weight(1f)
+
             )
             Image(
                 painter = painterResource(id = picture),
