@@ -74,7 +74,7 @@ fun HomeIcon(navController: NavHostController) {
         ),
         shape = RoundedCornerShape(10.dp),
         elevation = ButtonDefaults.buttonElevation(defaultElevation = 4.dp),
-        modifier = Modifier.border(BorderStroke(2.dp, Color.White), RoundedCornerShape(10.dp))
+        modifier = Modifier.border(BorderStroke(3.dp, Color.White), RoundedCornerShape(10.dp))
     ) {
         Icon(
             imageVector = Icons.Filled.Home,
