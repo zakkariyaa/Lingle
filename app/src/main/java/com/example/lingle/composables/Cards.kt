@@ -249,8 +249,8 @@ fun HomePageCard (
                 fontSize = 25.sp,
                 modifier = Modifier
                     .padding(bottom = 25.dp)
-                    .align(Alignment.CenterHorizontally)
-                    .weight(1f)
+                    .align(Alignment.CenterHorizontally),
+                fontSize = 25.sp,
             )
             Image(
                 painter = painterResource(picture),
