@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -39,7 +40,6 @@ fun ItemScreen(
     randomItems: ArrayList<Item>?,
     startColour: Color,
     endColour: Color,
-    navController: NavHostController,
     modifier: Modifier = Modifier) {
 
     var isFlipped by remember { mutableStateOf(false) }
@@ -101,11 +101,11 @@ fun ItemScreen(
                         )
                     } else {
                         Text(
-                            text = "Tap the card to find out!",
+                            text = stringResource(id = R.string.tap_card),
                             color = Color.Black,
                             fontWeight = FontWeight.Bold,
                             fontSize = 20.sp,
-                            modifier = Modifier.padding(10.dp)
+                            modifier = Modifier.padding(15.dp)
                         )
                     }
                     Spacer(
@@ -132,7 +132,7 @@ fun ItemScreen(
                     Spacer(modifier = modifier
                         .weight(0.5f)
                     )
-                    NewGameButton(modifier = modifier.weight(1f))
+                    NewGameButton(onClick = { navController.navigate("item/${category}") }, modifier = modifier.weight(1f))
                     Spacer(modifier = modifier
                         .weight(0.5f)
                     )
@@ -151,7 +151,7 @@ fun ItemScreen(
 )
 @Composable
 fun ItemScreenPreview() {
-    val navController = rememberNavController()
+    val navController = rememberNavController() 
     val items = arrayListOf(
         Item("Apple", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/1_kjyk3h.png"),
         Item("Pear", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/5_qbaizz.png"),
@@ -159,12 +159,11 @@ fun ItemScreenPreview() {
         Item("Strawberry", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/3_kiv5du.png"),
         Item("Banana", "https://res.cloudinary.com/dqgeypwaa/image/upload/v1702393272/4_w6aicq.png"),
     )
-        ItemScreen(
-            category = "Fruits",
-            randomItems = items,
-            startColour = LightOrange,
-            endColour = DarkOrange,
-            navController = navController,
-            modifier = Modifier
-        )
+    ItemScreen(
+        category = "Fruits",
+        randomItems = items,
+        startColour = LightOrange,
+        endColour = DarkOrange,
+        modifier = Modifier
+    )
 }

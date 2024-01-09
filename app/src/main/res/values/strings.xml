@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">Lingle</string>
     <string name="choose_category">Pick a Category</string>
-    <string name="category_title">Fruits</string>
     <string name="final_message">Well done!</string>
     <string name="new_game">New Game</string>
+    <string name="flip_animation_label">Card Flip Animation</string>
+    <string name="volume_icon">Volume Icon</string>
+    <string name="guess">Guess what this is?</string>
+    <string name="tap_card">Tap the card to find out!</string>
 </resources>
