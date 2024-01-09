@@ -131,7 +131,7 @@ fun ItemScreen(
                     Spacer(modifier = modifier
                         .weight(0.5f)
                     )
-                    NewGameButton(modifier = modifier.weight(1f))
+                    NewGameButton(onClick = { navController.navigate("item/${category}") }, modifier = modifier.weight(1f))
                     Spacer(modifier = modifier
                         .weight(0.5f)
                     )

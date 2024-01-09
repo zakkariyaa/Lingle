@@ -30,9 +30,9 @@ import com.example.lingle.R
 
 // Button to link to a new game of the same category
 @Composable
-fun NewGameButton(modifier: Modifier = Modifier) {
+fun NewGameButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
     Button(
-        onClick = { /*TODO*/ },
+        onClick = onClick,
         shape = RoundedCornerShape(10.dp),
         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF077274)),
         border = BorderStroke(3.dp, Color.White),
