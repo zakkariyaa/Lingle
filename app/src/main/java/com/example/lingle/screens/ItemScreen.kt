@@ -45,6 +45,7 @@ fun ItemScreen(
 
     var isFlipped by remember { mutableStateOf(false) }
     var currentItemIndex by remember { mutableIntStateOf(0) }
+    var progress by remember { mutableIntStateOf(1) }
 
     Column(
         // Show screen background colour, according to selected category
@@ -76,6 +77,11 @@ fun ItemScreen(
                                 .weight(1f)
                         )
                     }
+                    Text(
+                        text = "${progress}/5",
+                        fontSize = 20.sp,
+                        modifier = Modifier.padding(top = 10.dp)
+                    )
                     Spacer(modifier = modifier
                         .weight(0.5f)
                     )
@@ -96,6 +102,7 @@ fun ItemScreen(
                         NextButton(
                             isFlipped = isFlipped,
                             onButtonClick = {
+                                progress += 1
                                 currentItemIndex += 1
                                 isFlipped = false // Reset back to false
                             }
