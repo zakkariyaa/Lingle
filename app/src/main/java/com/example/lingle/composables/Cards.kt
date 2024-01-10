@@ -48,6 +48,10 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.lingle.R
 import com.example.lingle.utils.Item
+import com.example.lingle.utils.anonKey
+import com.example.lingle.utils.serviceRole
+import com.example.lingle.utils.url
+import java.io.File
 import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -229,6 +233,14 @@ fun HomePageCard (
     navController: NavHostController,
     modifier: Modifier,
     ) {
+
+    try {
+        println("HERE IS THE URL: $url")
+        println("HERE IS THE URL: $anonKey")
+        println("HERE IS THE URL: $serviceRole")
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
 
     Card(onClick = { navController.navigate("item/${category}") },
         colors = CardDefaults.cardColors(color),
