@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -40,11 +41,11 @@ fun ItemScreen(
     startColour: Color,
     endColour: Color,
     navController: NavHostController,
-    modifier: Modifier = Modifier
-) {
+    modifier: Modifier = Modifier) {
 
     var isFlipped by remember { mutableStateOf(false) }
     var currentItemIndex by remember { mutableIntStateOf(0) }
+    var progress by remember { mutableIntStateOf(1) }
 
     Column(
         // Show screen background colour, according to selected category
@@ -76,6 +77,11 @@ fun ItemScreen(
                                 .weight(1f)
                         )
                     }
+                    Text(
+                        text = "${progress}/5",
+                        fontSize = 20.sp,
+                        modifier = Modifier.padding(top = 10.dp)
+                    )
                     Spacer(modifier = modifier
                         .weight(0.5f)
                     )
@@ -96,6 +102,7 @@ fun ItemScreen(
                         NextButton(
                             isFlipped = isFlipped,
                             onButtonClick = {
+                                progress += 1
                                 currentItemIndex += 1
                                 isFlipped = false // Reset back to false
                             }

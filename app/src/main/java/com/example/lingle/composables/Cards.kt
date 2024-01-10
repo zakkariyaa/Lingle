@@ -1,4 +1,5 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.example.lingle.composables
 
 import android.speech.tts.TextToSpeech
@@ -242,13 +243,13 @@ fun HomePageCard (
             verticalArrangement = Arrangement.Center,
             modifier = Modifier
                 .padding(20.dp)
-        ) {
-            Text (
+        ){
+            Text(
                 text = category,
+                fontSize = 25.sp,
                 modifier = Modifier
                     .padding(bottom = 25.dp)
                     .align(Alignment.CenterHorizontally),
-                fontSize = 25.sp,
             )
             Image(
                 painter = painterResource(picture),
