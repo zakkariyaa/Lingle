@@ -233,10 +233,10 @@ fun HomePageCard (
     Card(onClick = { navController.navigate("item/${category}") },
         colors = CardDefaults.cardColors(color),
         border = BorderStroke(3.dp, Color.White),
-        elevation = CardDefaults.cardElevation(16.dp),
+        elevation = CardDefaults.cardElevation(8.dp),
         modifier = Modifier
             .fillMaxSize()
-            .padding(15.dp)
+            .padding(10.dp)
 
     ){
         Column (

@@ -55,7 +55,7 @@ fun NewGameButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NextButton(onButtonClick: () -> Unit, modifier: Modifier = Modifier, isFlipped: Boolean) {
+fun NextButton(onButtonClick: () -> Unit, modifier: Modifier = Modifier) {
     Button(
         onClick = onButtonClick,
         colors = ButtonDefaults.buttonColors(

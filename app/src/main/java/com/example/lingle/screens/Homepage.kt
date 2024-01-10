@@ -44,21 +44,24 @@ fun HomePage(categories: List<Category>?, navController: NavHostController, modi
                     ),
                 )
             )
-            .padding(top = 80.dp)
+            .padding(horizontal = 10.dp, vertical = 48.dp)
     ) {
         Box(
             modifier = modifier
                 .align(Alignment.CenterHorizontally)
         ) {
             SubHeadingText(
-                text = stringResource(id = R.string.choose_category)
+                text = stringResource(id = R.string.choose_category),
             )
         }
+        Spacer(modifier = modifier.height(10.dp))
         if (categories != null) {
+//            Autogenerate columns and rows for HomePageCards
             LazyVerticalGrid(
                 columns = GridCells.Adaptive(minSize = 158.dp),
                 content = {
                 items(categories.size) {index ->
+//                    Generate a HomePageCard for each category to be used in Grid
                     HomePageCard (
                         category = categories[index].name,
                         color = categoriesColorList[index % categoriesColorList.size].second,
@@ -66,12 +69,11 @@ fun HomePage(categories: List<Category>?, navController: NavHostController, modi
                         navController = navController,
                         modifier = modifier
                             .weight(0.5f)
-                    )
+                        )
+                    }
                 }
-            }
             )
         }
-
         Spacer(modifier = modifier
             .height(50.dp))
     }

@@ -36,42 +36,40 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             LingleTheme {
-//                 Surface(
-//                     modifier = Modifier.fillMaxSize(),
-//                     color = MaterialTheme.colorScheme.background
-//                 ) {
-// //                    HomePage()
-//                     FinalScreenLayout(
-//                         startColour = lightOrange,
-//                         endColour = darkOrange
-//                     )
                 val navController = rememberNavController()
-//                val offsetY = (-50).dp
                 Column(modifier = Modifier.fillMaxSize(),
-                        verticalArrangement = Arrangement.spacedBy((-50).dp),
+                        verticalArrangement = Arrangement.spacedBy((-40).dp), // Navbar overlap with main screen content
                     ) {
                     Box(modifier = Modifier.zIndex(2f)) {
                         Navbar(navController = navController)
                     }
                     Box(
                         modifier = Modifier
-//                            .absoluteOffset(x = 0.dp, y = offsetY)
-//                            .weight(1f)
                             .zIndex(1f)
                     ) {
                         NavHost(
                             navController = navController,
                             startDestination = "home",
                         ) {
-                            composable("home") { HomePage(categories = categories, navController = navController, modifier = Modifier) }
+//                            Create a route for home page
+                            composable("home") {
+                                HomePage(
+                                    categories = categories,
+                                    navController = navController,
+                                    modifier = Modifier
+                                )
+                            }
+//                            Create a route for specific item page based on category choice
                             composable("item/{category}") {
                                 backStackEntry ->
+//                                Create variables to pass into ItemScreen page
                                 val category: String = rememberSaveable { backStackEntry.arguments?.getString("category") ?: ""}
                                 val randomItems: ArrayList<Item> = rememberSaveable { randomItems(category) ?: arrayListOf() }
                                 val categoryIndex: Int = categories.indexOfFirst { it.name == category }
                                 val startColour: Color = categoriesColorList[categoryIndex % categoriesColorList.size].first
                                 val endColour: Color = categoriesColorList[categoryIndex % categoriesColorList.size].second
 
+//                                Call the ItemScreen with chosen category and arguments
                                 ItemScreen(
                                     category,
                                     randomItems,
