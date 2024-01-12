@@ -233,15 +233,6 @@ fun HomePageCard (
     navController: NavHostController,
     modifier: Modifier,
     ) {
-
-    try {
-        println("HERE IS THE URL: $url")
-        println("HERE IS THE URL: $anonKey")
-        println("HERE IS THE URL: $serviceRole")
-    } catch (e: Exception) {
-        e.printStackTrace()
-    }
-
     Card(onClick = { navController.navigate("item/${category}") },
         colors = CardDefaults.cardColors(color),
         border = BorderStroke(3.dp, Color.White),
